@@ -4,9 +4,6 @@ class AppAssets {
 
   /// splash screen
   static const splash = 'assets/images/splash.png';
-
-
-
   static const onboarding = 'assets/images/onboarding.png';
 
 

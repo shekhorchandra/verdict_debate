@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../core/values/app_color.dart';
 import '../../../core/values/app_text.dart';
+import '../../../routes/app_routes.dart';
 import '../controller/auth_controller.dart';
 
 class AuthView extends GetView<AuthController> {
@@ -253,7 +254,9 @@ class AuthView extends GetView<AuthController> {
       height: 52,
       decoration: BoxDecoration(gradient: grad, borderRadius: BorderRadius.circular(12)),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+            Get.toNamed(AppRoutes.EXPLORE);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,

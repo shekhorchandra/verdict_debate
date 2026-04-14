@@ -4,5 +4,7 @@ abstract class AppRoutes {
 
   static const AUTH = '/auth';
 
-  static const HOME = '/home'; // Or wherever you go next
+  static const EXPLORE = '/explore';
+
+  static const EXPLORE_DETAILS = '/explore-details';
 }
