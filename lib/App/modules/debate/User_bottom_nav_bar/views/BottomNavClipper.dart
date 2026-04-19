@@ -5,7 +5,7 @@ class BottomNavClipper extends CustomClipper<Path> {
   Path getClip(Size size) { // Changed from getPath to getClip
     Path path = Path();
     double holeWidth = 80;
-    double curveSize = 25;
+    double curveSize = 0;
 
     // Start at the left side, slightly down for the corner radius
     path.moveTo(0, 20);

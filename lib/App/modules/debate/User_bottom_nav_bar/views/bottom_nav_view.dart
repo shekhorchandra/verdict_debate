@@ -9,7 +9,6 @@ import 'dart:ui';
 
 import 'BottomNavClipper.dart';
 
-
 class UserNavigationBarPage extends GetView<UserNavigationBarController> {
   const UserNavigationBarPage({super.key});
 
@@ -24,13 +23,12 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
         return Stack(
           children: [
             controller.screens[controller.selectedIndex.value],
-            if (controller.currentOverlayPage.value != null)
-              controller.currentOverlayPage.value!,
+            if (controller.currentOverlayPage.value != null) controller.currentOverlayPage.value!,
           ],
         );
       }),
       bottomNavigationBar: Container(
-        height: 120, // Height to accommodate floating button
+        height: 130, // Height to accommodate floating button
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -45,21 +43,20 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
                   decoration: BoxDecoration(
                     // Deep indigo background from your scale
                     color: AppColor.primaryScale.s950.withOpacity(0.85),
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.1),
-                      width: 0.5,
+                    border: Border.all(color: Colors.white.withOpacity(0.1), width: 0.5),
+                  ),
+                  child: Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _navItem(0, 'Explore', AppAssets.explore, controller),
+                        _navItem(1, 'Debates', AppAssets.debate, controller),
+                        const SizedBox(width: 60), // Spacer for center button
+                        _navItem(2, 'Arena', AppAssets.arena, controller),
+                        _navItem(3, 'Profile', AppAssets.profile, controller),
+                      ],
                     ),
                   ),
-                  child: Obx(() => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _navItem(0, 'Explore', AppAssets.explore, controller),
-                      _navItem(1, 'Debates', AppAssets.debate, controller),
-                      const SizedBox(width: 60), // Spacer for center button
-                      _navItem(2, 'Arena', AppAssets.arena, controller),
-                      _navItem(3, 'Profile', AppAssets.profile, controller),
-                    ],
-                  )),
                 ),
               ),
             ),
@@ -70,22 +67,19 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
               child: GestureDetector(
                 onTap: () => print("Add tapped"),
                 child: Container(
-                  height: 85,
+                  height: 65,
                   width: 65,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.primaryScale.s600,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColor.primaryScale.s600.withOpacity(0.4),
-                          blurRadius: 15,
-                          offset: const Offset(0, 8),
-                        )
-                      ],
-                      border: Border.all(
-                        color: Colors.black.withOpacity(0.3),
-                        width: 4,
-                      )
+                    shape: BoxShape.circle,
+                    color: AppColor.primaryScale.s600,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColor.primaryScale.s600.withOpacity(0.4),
+                        blurRadius: 15,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                    border: Border.all(color: Colors.black.withOpacity(0.3), width: 4),
                   ),
                   child: const Icon(Icons.add, color: Colors.white, size: 35),
                 ),
@@ -100,7 +94,9 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
   Widget _navItem(int index, String label, String asset, UserNavigationBarController controller) {
     bool isSelected = controller.selectedIndex.value == index;
     // Highlight color (s400) or inactive color (s400 with opacity)
-    Color color = isSelected ? AppColor.primaryScale.s400 : AppColor.primaryScale.s400.withOpacity(0.5);
+    Color color = isSelected
+        ? AppColor.primaryScale.s400
+        : AppColor.primaryScale.s400.withOpacity(0.5);
 
     return GestureDetector(
       onTap: () => controller.changeTab(index),

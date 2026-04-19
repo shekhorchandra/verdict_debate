@@ -19,19 +19,16 @@ class DebateApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'FontMain',
-        textTheme: AppText.textTheme,
+          useMaterial3: true,
+          fontFamily: 'FontMain',
+          textTheme: AppText.textTheme
       ),
       initialRoute: AppRoutes.SPLASH,
       getPages: AppPages.pages,
       // THIS WRAPS EVERY PAGE IN THE GRADIENT BACKGROUND
       builder: (context, child) {
-        return GlobalBackground(
-          child: child ?? const SizedBox(),
-        );
+        return GlobalBackground(child: child ?? const SizedBox());
       },
     );
   }
-
 }
