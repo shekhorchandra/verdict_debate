@@ -16,7 +16,7 @@ class OnboardingController extends GetxController {
     },
     {
       "title": "Debate in Real Time",
-      "subtitle": "Join live audio debates, challenge others, and let your arguments be heard.",
+      "subtitle": "Join live audio debates, waiting others, and let your arguments be heard.",
       "image": "assets/images/Onboarding2.png",
     },
     {

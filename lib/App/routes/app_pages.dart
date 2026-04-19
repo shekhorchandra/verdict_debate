@@ -9,8 +9,8 @@ import '../modules/debate/User_bottom_nav_bar/bindings/user_navigation_bar_bindi
 import '../modules/debate/User_bottom_nav_bar/views/bottom_nav_view.dart';
 import '../modules/debate/arena/bindings/ArenaBinding.dart';
 import '../modules/debate/arena/views/ArenaView.dart';
-import '../modules/debate/debates_client/bindings/DebatesBinding.dart';
-import '../modules/debate/debates_client/views/DebatesView.dart';
+import '../modules/debate/debates_client/live/bindings/DebatesBinding.dart';
+import '../modules/debate/debates_client/live/views/DebatesView.dart';
 import '../modules/debate/explore_debate/explore/binding/DebateBinding.dart';
 import '../modules/debate/explore_debate/explore/views/DebateView.dart';
 import '../modules/debate/explore_debate/explore_details/binding/explore_details_binding.dart';

@@ -107,6 +107,11 @@ class AuthView extends GetView<AuthController> {
                             ),
                           ),
 
+                        if (!controller.isSignIn.value) ...[
+                          const SizedBox(height: 16),
+                          _buildTermsSection(),
+                        ],
+
                         const SizedBox(height: 24),
 
                         // --- ACTION BUTTON ---
@@ -151,6 +156,49 @@ class AuthView extends GetView<AuthController> {
   }
 
   // --- UI HELPER METHODS ---
+  Widget _buildTermsSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // Text Part
+        RichText(
+          text: TextSpan(
+            style: AppText.label.regular.copyWith(color: Colors.white70),
+            children: [
+              const TextSpan(text: "I agree to the "),
+              TextSpan(
+                text: "terms & conditions",
+                style: AppText.label.medium.copyWith(
+                  color: AppColor.primaryScale.s300,
+                  decoration: TextDecoration.underline,
+                ),
+                // Add recognizer here if you want to navigate to a terms page
+              ),
+            ],
+          ),
+        ),
+
+        // Checkbox Part
+        Obx(
+              () => SizedBox(
+            height: 24,
+            width: 24,
+            child: Checkbox(
+              value: controller.isAgreed.value,
+              onChanged: controller.toggleAgreed,
+              activeColor: AppColor.primaryScale.s500,
+              checkColor: Colors.white,
+              side: const BorderSide(color: Colors.white38, width: 1.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
 
   Widget _buildTabs() {
     return Row(

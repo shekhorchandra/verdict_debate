@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../arena/views/ArenaView.dart';
-import '../../debates_client/views/DebatesView.dart';
 
+import '../../debates_client/live/views/DebatesView.dart';
 import '../../explore_debate/explore/views/DebateView.dart';
 import '../../profile/views/ProfileView.dart';
 
