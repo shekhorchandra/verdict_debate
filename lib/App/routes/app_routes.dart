@@ -1,6 +1,9 @@
 abstract class AppRoutes {
+
   static const SPLASH = '/splash';
   static const ONBOARDING = '/onboarding';
+
+  static const USER_BOTTOM_NAV = '/navigation-bar';
 
   static const AUTH = '/auth';
 
@@ -16,7 +19,10 @@ abstract class AppRoutes {
 
   static const PROFILE = '/profile';
 
-  static const USER_BOTTOM_NAV = '/navigation-bar';
+  static const GEMS_SHOP = '/gems-shop';
+
+  static const PREMIUM_PLANS = '/premium-plans';
+
 
   /// create poll
   static const CREATE_POLL = '/create-poll';

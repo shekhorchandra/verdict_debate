@@ -5,11 +5,7 @@ import '../../arena/views/ArenaView.dart';
 
 import '../../debates_client/live/views/DebatesView.dart';
 import '../../explore_debate/explore/views/ExploreView.dart';
-import '../../profile/views/ProfileView.dart';
-
-
-
-
+import '../../profile/user_profile/views/ProfileView.dart';
 
 class UserNavigationBarController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;

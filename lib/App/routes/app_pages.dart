@@ -19,31 +19,47 @@ import '../modules/debate/explore_debate/voting/binding/VotingInsightsBinding.da
 import '../modules/debate/explore_debate/voting/views/VotingInsightsView.dart';
 import '../modules/debate/poll/binding/CreatePollBinding.dart';
 import '../modules/debate/poll/views/CreatePollView.dart';
-import '../modules/debate/profile/bindings/ProfileBinding.dart';
-import '../modules/debate/profile/views/ProfileView.dart';
 
+
+import '../modules/debate/profile/gems/bindings/GemsShopBinding.dart';
+import '../modules/debate/profile/gems/views/GemsShopView.dart';
+import '../modules/debate/profile/package/bindings/PremiumPlansBinding.dart';
+import '../modules/debate/profile/package/views/PremiumPlansView.dart';
+import '../modules/debate/profile/user_profile/bindings/ProfileBinding.dart';
+import '../modules/debate/profile/user_profile/views/ProfileView.dart';
 import 'app_routes.dart';
 
 class AppPages {
   static final pages = [
+    /// splash screen
     GetPage(
       name: AppRoutes.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
     ),
 
+    /// onboarding screen
     GetPage(
       name: AppRoutes.ONBOARDING,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
     ),
 
+    /// auth screen
     GetPage(
       name: AppRoutes.AUTH,
       page: () => const AuthView(),
       binding: AuthBinding(),
     ),
 
+    /// User Bottom Nav Bar
+    GetPage(
+      name: AppRoutes.USER_BOTTOM_NAV,
+      page: () => const UserNavigationBarPage(),
+      binding: UserNavigationBinding(),
+    ),
+
+    /// Explore screen
     GetPage(
       name: AppRoutes.EXPLORE,
       page: () => const ExploreView(),
@@ -63,23 +79,22 @@ class AppPages {
       binding: VotingInsightsBinding(),
     ),
 
-    /// User Bottom Nav Bar
-    GetPage(
-      name: AppRoutes.USER_BOTTOM_NAV,
-      page: () => const UserNavigationBarPage(),
-      binding: UserNavigationBinding(),
-    ),
 
+    /// debates screen
     GetPage(
       name: AppRoutes.DEBATES,
       page: () => const DebatesView(),
       binding: DebatesBinding(),
     ),
+
+    /// Arena Screen
     GetPage(
       name: AppRoutes.AREANA,
       page: () => const ArenaView(),
       binding: ArenaBinding(),
     ),
+
+    /// Profile
     GetPage(
       name: AppRoutes.PROFILE,
       page: () => const ProfileView(),
@@ -91,6 +106,20 @@ class AppPages {
       name: AppRoutes.CREATE_POLL,
       page: () => const CreatePollView(),
       binding: CreatePollBinding(),
+    ),
+
+    ///gems shop
+    GetPage(
+      name: AppRoutes.GEMS_SHOP,
+      page: () => const GemsShopView(),
+      binding: GemsShopBinding(),
+    ),
+
+    /// premiumn package
+    GetPage(
+      name: AppRoutes.PREMIUM_PLANS,
+      page: () => const PremiumPlansView(),
+      binding: PremiumPlansBinding(),
     ),
 
   ];

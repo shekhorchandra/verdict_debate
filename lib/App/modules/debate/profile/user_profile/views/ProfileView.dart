@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/values/app_color.dart';
-import '../../../../core/values/app_text.dart';
+import '../../../../../core/values/app_color.dart';
+import '../../../../../core/values/app_text.dart';
+import '../../../../../routes/app_routes.dart';
 import '../controller/ProfileController.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -113,51 +114,86 @@ class ProfileView extends GetView<ProfileController> {
   Widget _buildActionRow() {
     return Row(
       children: [
-        _actionBtn(Icons.translate, "English", hasArrow: true),
+        _actionBtn(
+          Icons.translate,
+          "English",
+          hasArrow: true,
+          onTap: () => print("Language clicked"),
+        ),
         const SizedBox(width: 12),
-        _actionBtn(Icons.card_giftcard, "Gifts"),
+        _actionBtn(
+          Icons.card_giftcard,
+          "Gifts",
+          onTap: () => print("Gifts clicked"),
+        ),
         const SizedBox(width: 12),
-        _actionBtn(Icons.diamond_outlined, "Gems Shop"),
+        _actionBtn(
+          Icons.diamond_outlined,
+          "Gems Shop",
+          onTap: () {
+            // Navigate to Gems Shop
+            Get.toNamed(AppRoutes.GEMS_SHOP);
+
+          },
+        ),
       ],
     );
   }
 
-  Widget _actionBtn(IconData icon, String label, {bool hasArrow = false}) {
+  Widget _actionBtn(IconData icon, String label, {bool hasArrow = false, VoidCallback? onTap}) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 18),
-            const SizedBox(width: 6),
-            Text(label, style: AppText.label.bold.copyWith(color: Colors.white)),
-            if (hasArrow) const Icon(Icons.arrow_right, color: Colors.white),
-          ],
+      child: GestureDetector(
+        onTap: onTap, // Link the click action here
+        behavior: HitTestBehavior.opaque, // Ensures the entire area is clickable
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.white, size: 18),
+              const SizedBox(width: 6),
+              Text(label, style: AppText.label.bold.copyWith(color: Colors.white)),
+              if (hasArrow) const Icon(Icons.arrow_right, color: Colors.white),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildPremiumCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFF3B2D60), Color(0xFF6366F1)]),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.diamond, color: Color(0xFFC7D2FE), size: 30),
-          const SizedBox(width: 15),
-          Text("Get Premium", style: AppText.body1.bold.copyWith(color: Colors.white)),
-          const Spacer(),
-          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.white),
-        ],
+    return GestureDetector(
+      onTap: () {
+        // Navigate to Premium Plans page
+        Get.toNamed(AppRoutes.PREMIUM_PLANS);
+      },
+      // behavior: HitTestBehavior.opaque ensures the entire area
+      // including empty space is clickable
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF3B2D60), Color(0xFF6366F1)],
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.diamond, color: Color(0xFFC7D2FE), size: 30),
+            const SizedBox(width: 15),
+            Text(
+              "Get Premium",
+              style: AppText.body1.bold.copyWith(color: Colors.white),
+            ),
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.white),
+          ],
+        ),
       ),
     );
   }
