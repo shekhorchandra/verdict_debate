@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/values/app_assets.dart';
 import '../../../../core/values/app_color.dart';
+import '../../../../routes/app_routes.dart';
 import '../controllers/bottom_nav_controller.dart';
 
 import 'dart:ui';
@@ -65,7 +66,10 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
             Positioned(
               top: 0,
               child: GestureDetector(
-                onTap: () => print("Add tapped"),
+                onTap: () {
+                  // NAVIGATE TO THE CREATE POLL PAGE
+                  Get.toNamed(AppRoutes.CREATE_POLL);
+                },
                 child: Container(
                   height: 65,
                   width: 65,

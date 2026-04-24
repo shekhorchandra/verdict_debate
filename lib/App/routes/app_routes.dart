@@ -16,5 +16,8 @@ abstract class AppRoutes {
 
   static const PROFILE = '/profile';
 
-  static const USER_BOTTOM_NAV = '/navigation_bar';
+  static const USER_BOTTOM_NAV = '/navigation-bar';
+
+  /// create poll
+  static const CREATE_POLL = '/create-poll';
 }

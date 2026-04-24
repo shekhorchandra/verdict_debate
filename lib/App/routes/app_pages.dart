@@ -17,6 +17,8 @@ import '../modules/debate/explore_debate/explore_details/binding/explore_details
 import '../modules/debate/explore_debate/explore_details/views/DebateDetailsPage.dart';
 import '../modules/debate/explore_debate/voting/binding/VotingInsightsBinding.dart';
 import '../modules/debate/explore_debate/voting/views/VotingInsightsView.dart';
+import '../modules/debate/poll/binding/CreatePollBinding.dart';
+import '../modules/debate/poll/views/CreatePollView.dart';
 import '../modules/debate/profile/bindings/ProfileBinding.dart';
 import '../modules/debate/profile/views/ProfileView.dart';
 
@@ -82,6 +84,13 @@ class AppPages {
       name: AppRoutes.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+
+    /// create poll
+    GetPage(
+      name: AppRoutes.CREATE_POLL,
+      page: () => const CreatePollView(),
+      binding: CreatePollBinding(),
     ),
 
   ];

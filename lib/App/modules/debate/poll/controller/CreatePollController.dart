@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class CreatePollController extends GetxController {
+  var selectedTab = 0.obs; // 0 for Poll, 1 for Go Live
+  var argumentText = "".obs;
+  var selectedPosition = "".obs;
+  var selectedDuration = "10m".obs; // Default duration
+
+  final TextEditingController textController = TextEditingController();
+
+  final List<String> durations = ["10m", "15m", "30m", "45m", "60m", "75m"];
+  final List<String> proDurations = ["30m", "45m", "60m", "75m"];
+
+  void updateText(String val) => argumentText.value = val;
+  void selectPosition(String pos) => selectedPosition.value = pos;
+  void selectDuration(String dur) => selectedDuration.value = dur;
+  void changeTab(int index) {
+    selectedTab.value = index;
+    textController.clear();
+    argumentText.value = "";
+  }
+
+  @override
+  void onClose() {
+    textController.dispose();
+    super.onClose();
+  }
+}
