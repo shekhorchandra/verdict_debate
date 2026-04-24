@@ -50,51 +50,61 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   Widget _buildMainProfileCard() {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppColor.primaryScale.s900.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(32),
-      ),
-      child: Row(
-        children: [
-          // Avatar with Border
-          Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFF818CF8), width: 2),
+    return GestureDetector(
+      onTap: () {
+        // Navigate to MyProfileView
+        Get.toNamed(AppRoutes.MY_PROFILE);
+      },
+      // behavior: HitTestBehavior.opaque ensures the entire container area
+      // including the empty space between avatar and stats is clickable.
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: AppColor.primaryScale.s900.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Row(
+          children: [
+            // Avatar with Border
+            Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFF818CF8), width: 2),
+                  ),
+                  child: const CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=1'),
+                  ),
                 ),
-                child: const CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=1'),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Obx(() => Text(controller.username.value,
+                        style: AppText.body1.bold.copyWith(color: Colors.white))),
+                    const SizedBox(width: 4),
+                    const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.white70),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Obx(() => Text(controller.username.value, style: AppText.body1.bold.copyWith(color: Colors.white))),
-                  const SizedBox(width: 4),
-                  const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.white70),
-                ],
-              ),
-            ],
-          ),
-          const Spacer(),
-          // Stats Column
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              _statItem(controller.followers.value, "Followers"),
-              _divider(),
-              _statItem(controller.debatesWon.value, "Debates Won"),
-              _divider(),
-              _statItem(controller.polls.value, "Polls"),
-            ],
-          ),
-        ],
+              ],
+            ),
+            const Spacer(),
+            // Stats Column
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                _statItem(controller.followers.value, "Followers"),
+                _divider(),
+                _statItem(controller.debatesWon.value, "Debates Won"),
+                _divider(),
+                _statItem(controller.polls.value, "Polls"),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -124,7 +134,11 @@ class ProfileView extends GetView<ProfileController> {
         _actionBtn(
           Icons.card_giftcard,
           "Gifts",
-          onTap: () => print("Gifts clicked"),
+          onTap: () {
+            // Navigate to Gems Shop
+            Get.toNamed(AppRoutes.GIFT);
+
+          },
         ),
         const SizedBox(width: 12),
         _actionBtn(

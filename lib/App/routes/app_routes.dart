@@ -21,7 +21,15 @@ abstract class AppRoutes {
 
   static const GEMS_SHOP = '/gems-shop';
 
+  static const GIFT = '/gift';
+
   static const PREMIUM_PLANS = '/premium-plans';
+
+  static const MY_PROFILE = '/my-profile';
+
+  static const WITHDRAW_EARNINGS = '/withdraw-earnings';
+
+  static const BUY_GIFTS = '/buy-gifts';
 
 
   /// create poll
