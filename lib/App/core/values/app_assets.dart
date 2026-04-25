@@ -12,4 +12,14 @@ class AppAssets {
   static const arena = 'assets/icons/arena.svg';
   static const profile = 'assets/icons/profile.svg';
 
+  static const war = 'assets/icons/war.svg';
+  static const poll = 'assets/icons/poll.svg';
+  static const send = 'assets/icons/send.svg';
+  static const repost = 'assets/icons/repost.svg';
+
+  // Payment method
+  static const visaPaymentMethod = 'assets/icons/visa.svg';
+  static const discoverPaymentMethod = 'assets/icons/discover_card_logo.svg';
+  static const paypalPaymentMethod = 'assets/icons/paypal.svg';
+
 }

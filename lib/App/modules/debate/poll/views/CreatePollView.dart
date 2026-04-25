@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../../core/values/app_assets.dart';
 import '../../../../core/values/app_color.dart';
 import '../../../../core/values/app_text.dart';
+import '../../../../core/widgets/common_app_bar.dart';
 import '../controller/CreatePollController.dart';
 
 class CreatePollView extends GetView<CreatePollController> {
@@ -10,49 +13,58 @@ class CreatePollView extends GetView<CreatePollController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F1029),
-      appBar: AppBar(
+      backgroundColor: Colors.transparent,
+      appBar: CommonAppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Obx(
+        showBack: true,
+        titleWidget: Obx(
           () => Text(
             controller.selectedTab.value == 0 ? "Create Poll" : "Go Live",
             style: AppText.h4.bold.copyWith(color: Colors.white),
           ),
         ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-        ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(8),
         child: Obx(
-          () => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTabBar(),
-              const SizedBox(height: 30),
+          () => Card(
+            color: const Color(0xFF818CF8).withOpacity(0.5),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTabBar(),
+                  const SizedBox(height: 10),
 
-              _buildLabel(controller.selectedTab.value == 0 ? "Your Argument" : "Debate Argument"),
-              _buildArgumentField(),
-              _buildCharCounter(),
+                  _buildLabel(
+                    controller.selectedTab.value == 0 ? "Your Argument" : "Debate Argument",
+                  ),
 
-              const SizedBox(height: 20),
-              _buildLabel("Your Position"),
-              _buildPositionButtons(),
+                  _buildArgumentField(),
+                  _buildCharCounter(),
 
-              const SizedBox(height: 30),
-              // Dynamic Section: Media for Poll / Duration for Go Live
-              controller.selectedTab.value == 0 ? _buildMediaSection() : _buildDurationSection(),
+                  // const SizedBox(height: 10),
+                  _buildLabel("Your Position"),
+                  _buildPositionButtons(),
 
-              const SizedBox(height: 30),
-              _buildTipsCard(),
+                  const SizedBox(height: 10),
 
-              const SizedBox(height: 40),
-              _buildActionButton(),
-            ],
+                  controller.selectedTab.value == 0
+                      ? _buildMediaSection()
+                      : _buildDurationSection(),
+
+                  const SizedBox(height: 20),
+
+                  _buildTipsCard(),
+
+                  const SizedBox(height: 20),
+
+                  _buildActionButton(),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -64,14 +76,15 @@ class CreatePollView extends GetView<CreatePollController> {
   Widget _buildTabBar() {
     return Row(
       children: [
-        _tabItem("Poll", Icons.poll_outlined, 0),
-        _tabItem("Go Live", Icons.title, 1), // Placeholder for Sword Icon
+        _tabItem("Poll", AppAssets.poll, 0),
+        _tabItem("Go Live", AppAssets.war, 1), // Placeholder for Sword Icon
       ],
     );
   }
 
-  Widget _tabItem(String title, IconData icon, int index) {
+  Widget _tabItem(String title, String iconPath, int index) {
     bool isActive = controller.selectedTab.value == index;
+
     return Expanded(
       child: GestureDetector(
         onTap: () => controller.changeTab(index),
@@ -80,15 +93,27 @@ class CreatePollView extends GetView<CreatePollController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: isActive ? Colors.white : Colors.white38, size: 20),
+                SvgPicture.asset(
+                  iconPath,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    isActive ? Colors.white : Colors.white38,
+                    BlendMode.srcIn,
+                  ),
+                ),
+
                 const SizedBox(width: 8),
+
                 Text(
                   title,
                   style: AppText.h5().copyWith(color: isActive ? Colors.white : Colors.white38),
                 ),
               ],
             ),
+
             const SizedBox(height: 8),
+
             Container(height: 2, color: isActive ? AppColor.primaryScale.s300 : Colors.white10),
           ],
         ),
@@ -127,7 +152,7 @@ class CreatePollView extends GetView<CreatePollController> {
           children: [
             const Icon(Icons.access_time, color: Colors.white, size: 18),
             const SizedBox(width: 8),
-            _buildLabel("Duration"),
+            _buildLabel("Duration per opponent"),
           ],
         ),
         const SizedBox(height: 10),
@@ -195,7 +220,7 @@ class CreatePollView extends GetView<CreatePollController> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withOpacity(0.5),
+        color: const Color(0xFF818CF8).withOpacity(0.5),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -213,13 +238,15 @@ class CreatePollView extends GetView<CreatePollController> {
           ),
           const SizedBox(height: 12),
           if (isPoll) ...[
-            _tipPoint("Ask clear, thought-provoking questions"),
-            _tipPoint("Present a balanced argument"),
+            _tipPoint("Ask clear, thought-provoking questions", 0),
+            _tipPoint("Present a balanced argument", 1),
+            _tipPoint("Use media to support your point", 2),
+            _tipPoint("Keep it respectful and engaging", 3),
           ] else ...[
-            _tipPoint("Choose a clear, debatable topic"),
-            _tipPoint("Be respectful to your opponent"),
-            _tipPoint("Present strong arguments"),
-            _tipPoint("Engage with your audience"),
+            _tipPoint("Choose a clear, debatable topic", 0),
+            _tipPoint("Be respectful to your opponent", 1),
+            _tipPoint("Present strong arguments", 2),
+            _tipPoint("Engage with your audience", 3),
           ],
         ],
       ),
@@ -228,6 +255,7 @@ class CreatePollView extends GetView<CreatePollController> {
 
   Widget _buildActionButton() {
     bool isPoll = controller.selectedTab.value == 0;
+
     return Container(
       width: double.infinity,
       height: 56,
@@ -252,8 +280,15 @@ class CreatePollView extends GetView<CreatePollController> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             const SizedBox(width: 10),
-            Icon(isPoll ? Icons.send : Icons.title, color: Colors.white, size: 20),
+
+            SvgPicture.asset(
+              isPoll ? AppAssets.send : AppAssets.war,
+              width: 20,
+              height: 20,
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
           ],
         ),
       ),
@@ -262,7 +297,7 @@ class CreatePollView extends GetView<CreatePollController> {
 
   // --- REUSABLE HELPERS (from previous implementation) ---
   Widget _buildLabel(String text) => Padding(
-    padding: const EdgeInsets.only(bottom: 12),
+    padding: const EdgeInsets.all(8),
     child: Text(text, style: AppText.body1.bold.copyWith(color: Colors.white)),
   );
   Widget _buildCharCounter() => Align(
@@ -338,12 +373,18 @@ class CreatePollView extends GetView<CreatePollController> {
       ),
     ),
   );
-  Widget _tipPoint(String text) => Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+  Widget _tipPoint(String text, int index) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("• ", style: TextStyle(color: Colors.white70, fontSize: 18)),
+        Text(
+          "${index + 1}.",
+          style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold),
+        ),
+
+        const SizedBox(width: 8),
+
         Expanded(
           child: Text(text, style: AppText.label().copyWith(color: Colors.white70)),
         ),

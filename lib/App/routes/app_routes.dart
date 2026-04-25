@@ -31,7 +31,19 @@ abstract class AppRoutes {
 
   static const BUY_GIFTS = '/buy-gifts';
 
+  static const ACCOUNT_SETTING = '/account-setting';
+  static const CHANGE_PASSWORD = '/change-password';
+  static const DELETE_ACCOUNT = '/delete-account';
+  static const ABOUT = '/about';
+  static const PRIVACY_POLICY = '/privacy-policy';
+  static const TERMS_CONDITION = '/terms-condition';
+  static const HELP_SUPPORT = '/help-support';
+
 
   /// create poll
   static const CREATE_POLL = '/create-poll';
+
+  // payment method
+  static const ADD_PAYMENT_METHOD = '/payment-method/add';
+  static const PAYMENT_METHOD = '/payment-method';
 }

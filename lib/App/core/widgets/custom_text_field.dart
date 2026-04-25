@@ -31,7 +31,9 @@ class CustomTextField extends StatelessWidget {
     this.errorText,
     this.focusNode,
     this.validator,
-    this.readOnly = false, // default false
+    this.readOnly = false,
+    required TextStyle hintStyle,
+    required TextStyle textStyle, // default false
   });
 
   @override
@@ -48,19 +50,34 @@ class CustomTextField extends StatelessWidget {
       maxLines: safeMaxLines,
       validator: validator,
 
+      style: const TextStyle(
+        color: Colors.white, // ✅ input text color
+      ),
+
       decoration: InputDecoration(
         hintText: hint,
-        errorText: errorText,
+        hintStyle: const TextStyle(
+          color: Colors.white54, // ✅ hint color
+        ),
 
-        prefixIcon: icon != null ? Icon(icon, color: Colors.grey) : null,
+        errorStyle: const TextStyle(
+          color: Colors.redAccent, // optional better visibility
+        ),
+
+        prefixIcon: icon != null
+            ? Icon(icon, color: Colors.white70)
+            : null,
 
         suffixIcon: suffix,
 
-        contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 16,
+        ),
 
         filled: true,
-        fillColor: Colors.white, // keep white for search feel
-        // SOFT BORDER (no shadow feel)
+        fillColor: const Color(0xFF1E1B4B), // ✅ dark background (important)
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide(color: AppColor.primary, width: 1),
@@ -68,17 +85,12 @@ class CustomTextField extends StatelessWidget {
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+          borderSide: BorderSide(color: Colors.white24),
         ),
 
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide(color: AppColor.primary, width: 1.5),
-        ),
-
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: Colors.grey.shade200),
         ),
 
         errorBorder: OutlineInputBorder(

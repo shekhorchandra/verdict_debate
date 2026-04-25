@@ -9,7 +9,7 @@ class PremiumPlansView extends GetView<PremiumPlansController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0E28), // Matches dark background
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Column(
           children: [

@@ -9,7 +9,7 @@ class WithdrawView extends GetView<WithdrawController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0E28),
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Column(
           children: [
@@ -214,7 +214,7 @@ class WithdrawView extends GetView<WithdrawController> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        gradient: const LinearGradient(colors: [Color(0xFF44418B), Color(0xFF242137)]),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -281,7 +281,7 @@ class WithdrawView extends GetView<WithdrawController> {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        gradient: const LinearGradient(colors: [Color(0xFF44418B), Color(0xFF242137)]),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -295,13 +295,13 @@ class WithdrawView extends GetView<WithdrawController> {
               children: [
                 const Text(
                   "Your withdrawal amount has been successfully debited to your payout account ***********55465",
-                  style: TextStyle(color: Colors.white70, fontSize: 11, height: 1.4),
+                  style: TextStyle(color: Colors.white, fontSize: 11, height: 1.4),
                 ),
               ],
             ),
           ),
           const SizedBox(width: 10),
-          const Text("02/04/26", style: TextStyle(color: Colors.white38, fontSize: 10)),
+          const Text("02/04/26", style: TextStyle(color: Colors.white, fontSize: 10)),
         ],
       ),
     );

@@ -19,17 +19,29 @@ import '../modules/debate/explore_debate/voting/binding/VotingInsightsBinding.da
 import '../modules/debate/explore_debate/voting/views/VotingInsightsView.dart';
 import '../modules/debate/poll/binding/CreatePollBinding.dart';
 import '../modules/debate/poll/views/CreatePollView.dart';
-
+import '../modules/debate/profile/about_us/views/About_View.dart';
+import '../modules/debate/profile/account_setting/change_password/bindings/ChangePasswordBinding.dart';
+import '../modules/debate/profile/account_setting/change_password/views/ChangePasswordView.dart';
+import '../modules/debate/profile/account_setting/delete_account/bindings/DeleteAccountBinding.dart';
+import '../modules/debate/profile/account_setting/delete_account/views/DeleteAccountView.dart';
+import '../modules/debate/profile/account_setting/setting/bindings/AccountSettingsBinding.dart';
+import '../modules/debate/profile/account_setting/setting/views/AccountSettingsView.dart';
 import '../modules/debate/profile/buy_gift/bindings/BuyGiftsBinding.dart';
 import '../modules/debate/profile/buy_gift/views/BuyGiftsView.dart';
 import '../modules/debate/profile/gems/bindings/GemsShopBinding.dart';
 import '../modules/debate/profile/gems/views/GemsShopView.dart';
 import '../modules/debate/profile/gift/bindings/GiftsBinding.dart';
 import '../modules/debate/profile/gift/views/GiftsView.dart';
+import '../modules/debate/profile/help_support/help_support_view/Help_Support_View.dart';
 import '../modules/debate/profile/my_profile_view/bindings/MyProfileBinding.dart';
 import '../modules/debate/profile/my_profile_view/views/MyProfileView.dart';
 import '../modules/debate/profile/package/bindings/PremiumPlansBinding.dart';
 import '../modules/debate/profile/package/views/PremiumPlansView.dart';
+import '../modules/debate/profile/payment_method/bindings/payment_method_binding.dart';
+import '../modules/debate/profile/payment_method/view/add_new_card_view.dart';
+import '../modules/debate/profile/payment_method/view/payment_methods_view.dart';
+import '../modules/debate/profile/privacy_policy/privacy_policy_view/Privacy_Policy_View.dart';
+import '../modules/debate/profile/terms_condition/terms_condition_view/Terms_Condition_View.dart';
 import '../modules/debate/profile/user_profile/bindings/ProfileBinding.dart';
 import '../modules/debate/profile/user_profile/views/ProfileView.dart';
 import '../modules/debate/profile/widthdraw_earning/bindings/WithdrawBinding.dart';
@@ -115,9 +127,56 @@ class AppPages {
     GetPage(name: AppRoutes.GIFT, page: () => const GiftsView(), binding: GiftsBinding()),
 
     /// withdraw earnings
-    GetPage(name: AppRoutes.WITHDRAW_EARNINGS, page: () => const WithdrawView(), binding: WithdrawBinding()),
+    GetPage(
+      name: AppRoutes.WITHDRAW_EARNINGS,
+      page: () => const WithdrawView(),
+      binding: WithdrawBinding(),
+    ),
 
     /// Buy gifts
-    GetPage(name: AppRoutes.BUY_GIFTS, page: () => const BuyGiftsView(), binding: BuyGiftsBinding()),
+    GetPage(
+      name: AppRoutes.BUY_GIFTS,
+      page: () => const BuyGiftsView(),
+      binding: BuyGiftsBinding(),
+    ),
+
+    /// paymernt method
+    GetPage(
+      name: AppRoutes.ADD_PAYMENT_METHOD,
+      page: () => AddNewCardView(),
+      binding: PaymentMethodBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.PAYMENT_METHOD,
+      page: () {
+        final args = Get.arguments as Map<String, dynamic>? ?? {};
+
+        return PaymentMethodsView(isSelectable: args['isSelectable'] as bool? ?? false);
+      },
+      binding: PaymentMethodBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.ACCOUNT_SETTING,
+      page: () => const AccountSettingsView(),
+      binding: AccountSettingsBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.CHANGE_PASSWORD,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.DELETE_ACCOUNT,
+      page: () => const DeleteAccountView(),
+      binding: DeleteAccountBinding(),
+    ),
+    GetPage(name: AppRoutes.ABOUT, page: () => const AboutView()),
+    GetPage(name: AppRoutes.PRIVACY_POLICY, page: () => const PrivacyPolicyView()),
+    GetPage(name: AppRoutes.TERMS_CONDITION, page: () => const TermsConditionView()),
+    GetPage(name: AppRoutes.HELP_SUPPORT, page: () => const HelpSupportView()),
   ];
 }

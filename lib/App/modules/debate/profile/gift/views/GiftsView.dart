@@ -120,8 +120,8 @@ class GiftsView extends GetView<GiftsController> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withOpacity(0.6),
-        borderRadius: BorderRadius.circular(24),
+        gradient: const LinearGradient(colors: [Color(0xFF44418B), Color(0xFF242260)]),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class GiftsView extends GetView<GiftsController> {
           ),
           const SizedBox(height: 20),
           Wrap(
-            spacing: 12,
+            spacing: 10,
             runSpacing: 15,
             children: controller.giftInventory.map((gift) => _giftItem(gift)).toList(),
           ),
@@ -253,8 +253,10 @@ class GiftsView extends GetView<GiftsController> {
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(16),
+        // color: const Color(0xFF818CF8).withOpacity(0.5),
+        gradient: const LinearGradient(colors: [Color(0xFF44418B), Color(0xFF242260)]),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFF818CF8).withOpacity(0.5)),
       ),
       child: Column(
         children: [
@@ -265,6 +267,7 @@ class GiftsView extends GetView<GiftsController> {
                 backgroundImage: NetworkImage('https://i.pravatar.cc/100'),
               ),
               const SizedBox(width: 10),
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,12 +277,14 @@ class GiftsView extends GetView<GiftsController> {
                   ],
                 ),
               ),
+
               Stack(
                 alignment: Alignment.topRight,
                 children: [
                   Text(icon, style: const TextStyle(fontSize: 24)),
+
                   Container(
-                    margin: const EdgeInsets.only(top: 0, left: 15),
+                    margin: const EdgeInsets.only(left: 15),
                     padding: const EdgeInsets.all(2),
                     decoration: const BoxDecoration(
                       color: Color(0xFF6366F1),
@@ -291,16 +296,18 @@ class GiftsView extends GetView<GiftsController> {
               ),
             ],
           ),
+
           const SizedBox(height: 10),
+
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF818CF8).withOpacity(0.2),
+              color: const Color(0xFFA5B4FC).withOpacity(0.9),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Text(
               'From: "Should remote work be the default for tech....',
-              style: TextStyle(color: Colors.white70, fontSize: 10),
+              style: TextStyle(color: Color(0xFF312E81), fontSize: 10),
             ),
           ),
         ],
@@ -322,20 +329,50 @@ class GiftsView extends GetView<GiftsController> {
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFF6366F1),
+            Color(0xFF4F46E5),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF6366F1).withOpacity(0.25),
+            blurRadius: 10,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: Colors.green, size: 24),
+          const Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 24,
+          ),
           const SizedBox(width: 15),
+
           Expanded(
             child: Text(
               "Your purchase of $items has been received.",
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-          Text(date, style: const TextStyle(color: Colors.white38, fontSize: 10)),
+
+          Text(
+            date,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 10,
+            ),
+          ),
         ],
       ),
     );

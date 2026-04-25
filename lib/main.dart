@@ -19,9 +19,20 @@ class DebateApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: 'FontMain',
-          textTheme: AppText.textTheme
+        brightness: Brightness.dark,
+        // scaffoldBackgroundColor: AppColor.BG,
+        // canvasColor: AppColor.BG,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        useMaterial3: true,
+        fontFamily: 'FontMain',
+        textTheme: AppText.textTheme,
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          },
+        ),
       ),
       initialRoute: AppRoutes.SPLASH,
       getPages: AppPages.pages,

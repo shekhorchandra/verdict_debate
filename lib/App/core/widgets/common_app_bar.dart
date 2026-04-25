@@ -5,29 +5,31 @@ import '../values/app_color.dart';
 import '../values/app_text.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  final String? title;
   final bool showBack;
   final VoidCallback? onBack;
   final List<Widget>? actions;
   final Color? backgroundColor;
   final Color? iconColor;
   final Color? titleColor;
+  final Widget? titleWidget;
 
   const CommonAppBar({
     super.key,
-    required this.title,
+    this.title,
     this.showBack = true,
     this.onBack,
     this.actions,
     this.backgroundColor,
     this.iconColor,
     this.titleColor,
+    this.titleWidget,
   });
 
   @override
   Widget build(BuildContext context) {
     final bgColor = backgroundColor ?? AppColor.BG;
-    final fgColor = AppColor.primary;
+    final fgColor = Colors.white;
 
     return AppBar(
       backgroundColor: bgColor,
@@ -46,12 +48,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       )
           : null,
 
-      title: Text(
-        title,
-        style: AppText.h4
-            .semiBold
-            .copyWith(color: titleColor ?? fgColor),
-      ),
+      title: titleWidget ??
+          Text(
+            title ?? '',
+            style: AppText.h4.semiBold.copyWith(
+              color: titleColor ?? fgColor,
+            ),
+          ),
 
       iconTheme: IconThemeData(
         color: iconColor ?? fgColor,

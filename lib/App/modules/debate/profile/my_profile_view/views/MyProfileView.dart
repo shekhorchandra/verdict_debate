@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:verdict_debate/App/core/values/app_assets.dart';
+import '../../../../../core/values/app_color.dart';
 import '../../../../../core/values/app_text.dart';
 import '../controller/MyProfileController.dart';
 
@@ -9,7 +12,7 @@ class MyProfileView extends GetView<MyProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0E28),
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Column(
           children: [
@@ -178,39 +181,48 @@ class MyProfileView extends GetView<MyProfileController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _tabItem("Polls", Icons.poll_outlined, 0),
-            _tabItem("Debates", Icons.title, 1),
-            _tabItem("Reposts", Icons.repeat, 2),
+            _tabItem("Polls", AppAssets.poll, 0),
+            _tabItem("Debates", AppAssets.war, 1),
+            _tabItem("Reposts", AppAssets.repost, 2),
           ],
         ),
       ),
     );
   }
 
-  Widget _tabItem(String label, IconData icon, int index) {
-    bool isSelected = controller.selectedTab.value == index;
-    return GestureDetector(
-      onTap: () => controller.changeTab(index),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: isSelected ? const Color(0xFF6366F1) : Colors.transparent,
-              width: 3,
-            ),
-          ),
-        ),
-        child: Row(
+  Widget _tabItem(String title, String iconPath, int index) {
+    bool isActive = controller.selectedTab.value == index;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => controller.changeTab(index),
+        child: Column(
           children: [
-            Icon(icon, color: isSelected ? Colors.white : Colors.white54, size: 18),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: AppText.body2.medium.copyWith(
-                color: isSelected ? Colors.white : Colors.white54,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconPath,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    isActive ? Colors.white : Colors.white38,
+                    BlendMode.srcIn,
+                  ),
+                ),
+
+                const SizedBox(width: 8),
+
+                Text(
+                  title,
+                  style: AppText.h5().copyWith(color: isActive ? Colors.white : Colors.white38),
+                ),
+              ],
             ),
+
+            const SizedBox(height: 8),
+
+            Container(height: 2, color: isActive ? AppColor.primaryScale.s300 : Colors.white10),
           ],
         ),
       ),
