@@ -612,16 +612,22 @@ class MyProfileView extends GetView<MyProfileController> {
       borderRadius: BorderRadius.circular(12),
       gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)]),
     ),
-    child: const Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Watch The Debate",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(width: 8),
-        Icon(Icons.title, color: Colors.white, size: 16),
-      ],
-    ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Watch The Debate",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 8),
+          // FIX: Use SvgPicture because AppAssets contains string paths
+          SvgPicture.asset(
+            AppAssets.debate, // or AppAssets.war if that is the correct key
+            height: 16,
+            width: 16,
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          ),
+        ],
+      ),
   );
 }
