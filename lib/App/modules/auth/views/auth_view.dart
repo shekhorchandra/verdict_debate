@@ -303,7 +303,7 @@ class AuthView extends GetView<AuthController> {
       decoration: BoxDecoration(gradient: grad, borderRadius: BorderRadius.circular(12)),
       child: ElevatedButton(
         onPressed: () {
-            Get.toNamed(AppRoutes.USER_BOTTOM_NAV);
+            Get.toNamed(AppRoutes.GENDER_SELECTION);
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,

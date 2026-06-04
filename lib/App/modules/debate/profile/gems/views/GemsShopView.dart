@@ -9,35 +9,71 @@ class GemsShopView extends GetView<GemsShopController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color(0xFF0A091E), // Deep dark background from design
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildAppBar(),
+
+            // 1. Gems Balance Section
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
                 children: [
-                  Text("Gem Packs", style: AppText.h3.bold.copyWith(color: Colors.white)),
-                  const SizedBox(height: 4),
-                  Text(
-                    "Buy gems and use them to unlock premium features",
-                    style: AppText.body2().copyWith(color: Colors.white60),
+                  Text("Gems you have:", style: TextStyle(color: Colors.white)),
+                  const SizedBox(width: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF252348).withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF6366F1).withOpacity(0.5)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.diamond_outlined, color: Color(0xFFA5B4FC), size: 20),
+                        const SizedBox(width: 8),
+                        Obx(() => Text(
+                          "${controller.currentBalance.value}",
+                          style: AppText.body1.bold.copyWith(color: Colors.white),
+                        )),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+
+            const SizedBox(height: 30),
+
+            // 2. Gem Packs Header
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Gem Packs", style: AppText.h4.bold.copyWith(color: Colors.white)),
+                  const SizedBox(height: 6),
+                  Text(
+                    "Buy gems and use them to unlock premium features",
+                    style: AppText.label().copyWith(color: Colors.white60),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // 3. Gem Grid
             Expanded(
               child: GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                  childAspectRatio: 0.85,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.82, // Made slightly taller to match design
                 ),
                 itemCount: controller.gemPacks.length,
                 itemBuilder: (context, index) => _buildGemCard(index),
@@ -52,23 +88,24 @@ class GemsShopView extends GetView<GemsShopController> {
   Widget _buildAppBar() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Row(
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          GestureDetector(
-            onTap: () => Get.back(),
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                shape: BoxShape.circle,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF252348), // Dark purple circle
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 18),
               ),
-              child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
             ),
           ),
-          const Spacer(),
           Text("Gems Shop", style: AppText.h5.bold.copyWith(color: Colors.white)),
-          const Spacer(),
-          const SizedBox(width: 40), // Balance the back button
         ],
       ),
     );
@@ -80,15 +117,13 @@ class GemsShopView extends GetView<GemsShopController> {
       onTap: () => controller.purchasePack(index),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF818CF8).withOpacity(0.85), // Vibrant purple from your scale
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            )
-          ],
+          // Gradient or solid vibrant violet matches the design
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
+          ),
+          borderRadius: BorderRadius.circular(28),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -96,18 +131,20 @@ class GemsShopView extends GetView<GemsShopController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.diamond_outlined, color: Colors.white, size: 24),
+                const Icon(Icons.diamond_outlined, color: Colors.white, size: 22),
                 const SizedBox(width: 8),
-                Text("${pack['gems']} Gems", style: AppText.body1.bold.copyWith(color: Colors.white)),
+                Text("${pack['gems']} Gems", style: AppText.body1.medium.copyWith(color: Colors.white)),
               ],
             ),
-            const SizedBox(height: 12),
-            Text("\$${pack['price']}",
-                style: AppText.title.bold.copyWith(color: Colors.white, fontSize: 32)
+            const SizedBox(height: 10),
+            Text(
+              "\$${pack['price']}",
+              style: AppText.h3.bold.copyWith(color: Colors.white, fontSize: 34),
             ),
-            const SizedBox(height: 8),
-            Text("\$${pack['unit']}/ gem",
-                style: AppText.label().copyWith(color: Colors.white70)
+            const SizedBox(height: 6),
+            Text(
+              "\$${pack['unit']}/ gem",
+              style: AppText.label().copyWith(color: Colors.white.withOpacity(0.6)),
             ),
           ],
         ),

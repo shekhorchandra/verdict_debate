@@ -1,22 +1,24 @@
 import 'package:get/get.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
+import '../modules/common/country/binding/GenderSelectionBinding.dart';
+import '../modules/common/country/view/GenderSelectionView.dart';
 import '../modules/common/onboarding/bindings/onboarding_binding.dart';
 import '../modules/common/onboarding/views/onboarding_view.dart';
 import '../modules/common/splash/bindings/splash_binding.dart';
 import '../modules/common/splash/views/splash_view.dart';
 import '../modules/debate/User_bottom_nav_bar/bindings/user_navigation_bar_binding.dart';
 import '../modules/debate/User_bottom_nav_bar/views/bottom_nav_view.dart';
-import '../modules/debate/arena/bindings/ArenaBinding.dart';
-import '../modules/debate/arena/views/ArenaView.dart';
-import '../modules/debate/debates_client/live/bindings/DebatesBinding.dart';
-import '../modules/debate/debates_client/live/views/DebatesView.dart';
-import '../modules/debate/explore_debate/explore/binding/ExploreBinding.dart';
-import '../modules/debate/explore_debate/explore/views/ExploreView.dart';
-import '../modules/debate/explore_debate/explore_details/binding/explore_details_binding.dart';
-import '../modules/debate/explore_debate/explore_details/views/DebateDetailsPage.dart';
-import '../modules/debate/explore_debate/voting/binding/VotingInsightsBinding.dart';
-import '../modules/debate/explore_debate/voting/views/VotingInsightsView.dart';
+import '../modules/debate/arena_debate/bindings/ArenaBinding.dart';
+import '../modules/debate/arena_debate/views/ArenaView.dart';
+import '../modules/debate/debates_live/live/bindings/DebatesBinding.dart';
+import '../modules/debate/debates_live/live/views/DebatesView.dart';
+import '../modules/debate/explore_polls/explore/binding/DebateBinding.dart';
+import '../modules/debate/explore_polls/explore/views/ExploreView.dart';
+import '../modules/debate/explore_polls/explore_details/binding/DebateDetailBinding.dart';
+import '../modules/debate/explore_polls/explore_details/views/DebateDetailView.dart';
+import '../modules/debate/explore_polls/voting/binding/VotingInsightsBinding.dart';
+import '../modules/debate/explore_polls/voting/views/VotingInsightsView.dart';
 import '../modules/debate/poll/binding/CreatePollBinding.dart';
 import '../modules/debate/poll/views/CreatePollView.dart';
 import '../modules/debate/profile/about_us/views/About_View.dart';
@@ -28,6 +30,10 @@ import '../modules/debate/profile/account_setting/setting/bindings/AccountSettin
 import '../modules/debate/profile/account_setting/setting/views/AccountSettingsView.dart';
 import '../modules/debate/profile/buy_gift/bindings/BuyGiftsBinding.dart';
 import '../modules/debate/profile/buy_gift/views/BuyGiftsView.dart';
+import '../modules/debate/profile/chat/chat_conversation/binding/ChatBinding.dart';
+import '../modules/debate/profile/chat/chat_conversation/views/ChatView.dart';
+import '../modules/debate/profile/chat/message/binding/MessagesBinding.dart';
+import '../modules/debate/profile/chat/message/views/MessagesView.dart';
 import '../modules/debate/profile/gems/bindings/GemsShopBinding.dart';
 import '../modules/debate/profile/gems/views/GemsShopView.dart';
 import '../modules/debate/profile/gift/bindings/GiftsBinding.dart';
@@ -51,7 +57,11 @@ import 'app_routes.dart';
 class AppPages {
   static final pages = [
     /// splash screen
-    GetPage(name: AppRoutes.SPLASH, page: () => const SplashView(), binding: SplashBinding()),
+    GetPage(
+      name: AppRoutes.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
+    ),
 
     /// onboarding screen
     GetPage(
@@ -61,7 +71,19 @@ class AppPages {
     ),
 
     /// auth screen
-    GetPage(name: AppRoutes.AUTH, page: () => const AuthView(), binding: AuthBinding()),
+    GetPage(
+      name: AppRoutes.AUTH,
+      page: () => const AuthView(),
+      binding: AuthBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.GENDER_SELECTION,
+      page: () => const GenderSelectionView(),
+      binding: GenderSelectionBinding(),
+
+    ),
+
 
     /// User Bottom Nav Bar
     GetPage(
@@ -71,7 +93,11 @@ class AppPages {
     ),
 
     /// Explore screen
-    GetPage(name: AppRoutes.EXPLORE, page: () => const ExploreView(), binding: DebateBinding()),
+    GetPage(
+      name: AppRoutes.EXPLORE,
+      page: () => const ExploreView(),
+      binding: DebateBinding(),
+    ),
 
     GetPage(
       name: AppRoutes.EXPLORE_DETAILS,
@@ -87,13 +113,25 @@ class AppPages {
     ),
 
     /// debates screen
-    GetPage(name: AppRoutes.DEBATES, page: () => const DebatesView(), binding: DebatesBinding()),
+    GetPage(
+      name: AppRoutes.DEBATES,
+      page: () => const DebatesView(),
+      binding: DebatesBinding(),
+    ),
 
     /// Arena Screen
-    GetPage(name: AppRoutes.AREANA, page: () => const ArenaView(), binding: ArenaBinding()),
+    GetPage(
+      name: AppRoutes.AREANA,
+      page: () => const ArenaView(),
+      binding: ArenaBinding(),
+    ),
 
     /// Profile
-    GetPage(name: AppRoutes.PROFILE, page: () => const ProfileView(), binding: ProfileBinding()),
+    GetPage(
+      name: AppRoutes.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
 
     /// create poll
     GetPage(
@@ -124,13 +162,31 @@ class AppPages {
     ),
 
     /// gift profile
-    GetPage(name: AppRoutes.GIFT, page: () => const GiftsView(), binding: GiftsBinding()),
+    GetPage(
+      name: AppRoutes.GIFT,
+      page: () => const GiftsView(),
+      binding: GiftsBinding(),
+    ),
 
     /// withdraw earnings
     GetPage(
       name: AppRoutes.WITHDRAW_EARNINGS,
       page: () => const WithdrawView(),
       binding: WithdrawBinding(),
+    ),
+
+    /// messages
+    GetPage(
+      name: AppRoutes.MESSAGES,
+      page: () => const MessagesView(),
+      binding: MessagesBinding(),
+    ),
+
+    ///chat conversation
+    GetPage(
+      name: AppRoutes.CHAT_DETAILS,
+      page: () => const ChatView(),
+      binding: ChatBinding(),
     ),
 
     /// Buy gifts
@@ -152,7 +208,9 @@ class AppPages {
       page: () {
         final args = Get.arguments as Map<String, dynamic>? ?? {};
 
-        return PaymentMethodsView(isSelectable: args['isSelectable'] as bool? ?? false);
+        return PaymentMethodsView(
+          isSelectable: args['isSelectable'] as bool? ?? false,
+        );
       },
       binding: PaymentMethodBinding(),
     ),
@@ -175,8 +233,14 @@ class AppPages {
       binding: DeleteAccountBinding(),
     ),
     GetPage(name: AppRoutes.ABOUT, page: () => const AboutView()),
-    GetPage(name: AppRoutes.PRIVACY_POLICY, page: () => const PrivacyPolicyView()),
-    GetPage(name: AppRoutes.TERMS_CONDITION, page: () => const TermsConditionView()),
+    GetPage(
+      name: AppRoutes.PRIVACY_POLICY,
+      page: () => const PrivacyPolicyView(),
+    ),
+    GetPage(
+      name: AppRoutes.TERMS_CONDITION,
+      page: () => const TermsConditionView(),
+    ),
     GetPage(name: AppRoutes.HELP_SUPPORT, page: () => const HelpSupportView()),
   ];
 }

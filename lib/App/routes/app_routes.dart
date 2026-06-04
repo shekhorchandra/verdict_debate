@@ -7,6 +7,8 @@ abstract class AppRoutes {
 
   static const AUTH = '/auth';
 
+  static const GENDER_SELECTION = '/gender-selection';
+
   static const EXPLORE = '/explore';
 
   static const EXPLORE_DETAILS = '/explore-details';
@@ -15,7 +17,7 @@ abstract class AppRoutes {
 
   static const DEBATES = '/debates';
 
-  static const AREANA = '/arena';
+  static const AREANA = '/arena_debate';
 
   static const PROFILE = '/profile';
 
@@ -30,6 +32,9 @@ abstract class AppRoutes {
   static const WITHDRAW_EARNINGS = '/withdraw-earnings';
 
   static const BUY_GIFTS = '/buy-gifts';
+
+  static const MESSAGES = '/messages';
+  static const CHAT_DETAILS = '/chat-details';
 
   static const ACCOUNT_SETTING = '/account-setting';
   static const CHANGE_PASSWORD = '/change-password';

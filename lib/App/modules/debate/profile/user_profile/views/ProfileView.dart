@@ -12,82 +12,149 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: const CommonAppBar(backgroundColor: Colors.transparent, title: 'Profile'),
+      // Set a dark background similar to the image
+      backgroundColor: const Color(0xFF0A091E),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text("Profile", style: TextStyle(color: Colors.white)),
+        // 1. Language Changer instead of Back Button
+        leadingWidth: 110,
+        leading: Center(
+          child: GestureDetector(
+            onTap: () => _showLanguageDialog(context),
+            child: Container(
+              margin: const EdgeInsets.only(left: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blueAccent.withOpacity(0.5)),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.translate, size: 14, color: Colors.white70),
+                  const SizedBox(width: 4),
+                  Text("English", style: AppText.label().copyWith(color: Colors.white, fontSize: 12)),
+                  const Icon(Icons.arrow_right, size: 18, color: Colors.white70),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
+            const SizedBox(height: 10),
             _buildMainProfileCard(),
             const SizedBox(height: 20),
-            _buildActionRow(),
+
+            // 2. Modified Action Rows (Messages/Arena and Gifts/Gems Shop)
+            _buildActionRows(),
+
             const SizedBox(height: 20),
             _buildPremiumCard(),
-
             const SizedBox(height: 20),
 
             _buildSettingGroup([
-              _settingTile(
-                Icons.payment_outlined,
-                "Payment Methods",
-                onTap: () {
-                  Get.toNamed(AppRoutes.PAYMENT_METHOD);
-                },
-              ),
-              _settingTile(
-                Icons.person_outline,
-                "Account Settings",
-                onTap: () {
-                  Get.toNamed(AppRoutes.ACCOUNT_SETTING);
-                },
-              ),
-
-              _settingTile(
-                Icons.headset_mic_outlined,
-                "Help & Support",
-                onTap: () {
-                  Get.toNamed(AppRoutes.HELP_SUPPORT);
-                },
-              ),
+              _settingTile(Icons.payment_outlined, "Payment Methods", onTap: () => Get.toNamed(AppRoutes.PAYMENT_METHOD)),
+              _settingTile(Icons.person_outline, "Account Settings", onTap: () => Get.toNamed(AppRoutes.ACCOUNT_SETTING)),
+              _settingTile(Icons.headset_mic_outlined, "Help & Support", onTap: () => Get.toNamed(AppRoutes.HELP_SUPPORT)),
             ]),
 
             const SizedBox(height: 20),
 
             _buildSettingGroup([
-              _settingTile(
-                Icons.info_outline,
-                "About Us",
-                onTap: () {
-                  Get.toNamed(AppRoutes.ABOUT);
-                },
-              ),
-              _settingTile(
-                Icons.shield_outlined,
-                "Privacy Policy",
-                onTap: () {
-                  Get.toNamed(AppRoutes.PRIVACY_POLICY);
-                },
-              ),
-              _settingTile(
-                Icons.description_outlined,
-                "Terms & Condition",
-                onTap: () {
-                  Get.toNamed(AppRoutes.TERMS_CONDITION);
-                },
-              ),
+              _settingTile(Icons.info_outline, "About Us", onTap: () => Get.toNamed(AppRoutes.ABOUT)),
+              _settingTile(Icons.shield_outlined, "Privacy Policy", onTap: () => Get.toNamed(AppRoutes.PRIVACY_POLICY)),
+              _settingTile(Icons.description_outlined, "Terms & Condition", onTap: () => Get.toNamed(AppRoutes.TERMS_CONDITION)),
             ]),
 
             const SizedBox(height: 30),
-
             _buildLogoutButton(),
-            const SizedBox(height: 200),
+            const SizedBox(height: 130),
           ],
         ),
       ),
     );
   }
 
-  // ---------------- MAIN PROFILE ----------------
+  // ---------------- MODIFIED ACTION ROWS ----------------
+
+  Widget _buildActionRows() {
+    return Column(
+      children: [
+        // Row 1: Large buttons with arrows
+        Row(
+          children: [
+            _actionBtn(
+                Icons.near_me_rounded,
+                "Messages",
+                hasArrow: true,
+                onTap: () => Get.toNamed(AppRoutes.MESSAGES)
+            ),
+            const SizedBox(width: 12),
+            _actionBtn(
+                Icons.local_fire_department_rounded,
+                "Arena",
+                hasArrow: true,
+                onTap: () {}
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Row 2: Smaller buttons
+        Row(
+          children: [
+            _actionBtn(
+                Icons.card_giftcard,
+                "Gifts",
+                onTap: () => Get.toNamed(AppRoutes.GIFT)
+            ),
+            const SizedBox(width: 12),
+            _actionBtn(
+                Icons.diamond_outlined,
+                "Gems Shop",
+                onTap: () => Get.toNamed(AppRoutes.GEMS_SHOP)
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _actionBtn(IconData icon, String label, {bool hasArrow = false, VoidCallback? onTap}) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+          decoration: BoxDecoration(
+            color: const Color(0xFF252348), // Translucent indigo
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.white, size: 20),
+              const SizedBox(width: 8),
+              Text(label, style: AppText.label.bold.copyWith(color: Colors.white)),
+              if (hasArrow) ...[
+                const Spacer(),
+                const Icon(Icons.arrow_forward_ios, color: Colors.white38, size: 12),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ---------------- EXISTING WIDGETS (STYLED) ----------------
 
   Widget _buildMainProfileCard() {
     return GestureDetector(
@@ -119,7 +186,7 @@ class ProfileView extends GetView<ProfileController> {
                 Row(
                   children: [
                     Obx(
-                      () => Text(
+                          () => Text(
                         controller.username.value,
                         style: AppText.body1.bold.copyWith(color: Colors.white),
                       ),
@@ -160,56 +227,10 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   Widget _divider() => Container(
-    height: 1,
-    width: 80,
+    height: 1, width: 80,
     margin: const EdgeInsets.symmetric(vertical: 8),
     color: Colors.white10,
   );
-
-  // ---------------- ACTION ROW ----------------
-
-  Widget _buildActionRow() {
-    return Row(
-      children: [
-        _actionBtn(Icons.translate, "English", hasArrow: true, onTap: () {}),
-        const SizedBox(width: 12),
-        _actionBtn(Icons.card_giftcard, "Gifts", onTap: () => Get.toNamed(AppRoutes.GIFT)),
-        const SizedBox(width: 12),
-        _actionBtn(
-          Icons.diamond_outlined,
-          "Gems Shop",
-          onTap: () => Get.toNamed(AppRoutes.GEMS_SHOP),
-        ),
-      ],
-    );
-  }
-
-  Widget _actionBtn(IconData icon, String label, {bool hasArrow = false, VoidCallback? onTap}) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, color: Colors.white, size: 18),
-              const SizedBox(width: 6),
-              Text(label, style: AppText.label.bold.copyWith(color: Colors.white)),
-              if (hasArrow) const Icon(Icons.arrow_right, color: Colors.white),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // ---------------- PREMIUM ----------------
 
   Widget _buildPremiumCard() {
     return GestureDetector(
@@ -234,12 +255,10 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  // ---------------- SETTINGS ----------------
-
   Widget _buildSettingGroup(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF818CF8).withOpacity(0.5),
+        color: const Color(0xFF252348).withOpacity(0.6),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(children: children),
@@ -255,24 +274,24 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  // ---------------- LOGOUT ----------------
-
   Widget _buildLogoutButton() {
     return Container(
       width: double.infinity,
       height: 56,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-        gradient: LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)]),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)]),
       ),
       child: ElevatedButton(
         onPressed: controller.logout,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
         child: Text("Log Out", style: AppText.body1.bold.copyWith(color: Colors.white)),
       ),
     );
+
+  }
+
+  void _showLanguageDialog(BuildContext context) {
+    // Implement language selection logic here
   }
 }

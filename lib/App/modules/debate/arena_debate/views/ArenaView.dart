@@ -226,7 +226,28 @@
 //   }
 // }
 
-//--------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////// STATIC PAGE ///////////////////////////////////
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -267,7 +288,7 @@ class ArenaView extends GetView<ArenaController> {
                     const SizedBox(height: 20),
 
                     Text(
-                      "Arena Battles",
+                      "Private Debates",
                       style: AppText.h3.bold.copyWith(
                         color: Colors.white,
                         fontSize: 28,

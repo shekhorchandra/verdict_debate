@@ -7,9 +7,9 @@ class AppAssets {
   static const onboarding = 'assets/images/onboarding.png';
 
   // USER bottom nav bar icons
-  static const explore = 'assets/icons/explore.svg';
+  static const polls = 'assets/icons/polls.svg';
+  static const live = 'assets/icons/live.svg';
   static const debate = 'assets/icons/debate.svg';
-  static const arena = 'assets/icons/arena.svg';
   static const profile = 'assets/icons/profile.svg';
 
   static const war = 'assets/icons/war.svg';

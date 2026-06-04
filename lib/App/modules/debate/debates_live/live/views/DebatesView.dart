@@ -100,7 +100,10 @@
 
 
 
-//------------------------------------------------------------
+
+
+/////////////////////////////////// STATIC PAGE ///////////////////////////////////
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -142,7 +145,7 @@ class DebatesView extends GetView<DebatesController> {
                     const SizedBox(height: 20),
 
                     Text(
-                      "Debates Arena",
+                      "Live Session",
                       style: AppText.h3.bold.copyWith(
                         color: Colors.white,
                         fontSize: 28,

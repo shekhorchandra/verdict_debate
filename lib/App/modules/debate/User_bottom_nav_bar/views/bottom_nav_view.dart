@@ -50,10 +50,10 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
                     () => Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _navItem(0, 'Explore', AppAssets.explore, controller),
-                        _navItem(1, 'Debates', AppAssets.debate, controller),
+                        _navItem(0, 'Polls', AppAssets.polls, controller),
+                        _navItem(1, 'Live', AppAssets.live, controller),
                         const SizedBox(width: 60), // Spacer for center button
-                        _navItem(2, 'Arena', AppAssets.arena, controller),
+                        _navItem(2, 'Debate', AppAssets.debate, controller),
                         _navItem(3, 'Profile', AppAssets.profile, controller),
                       ],
                     ),
