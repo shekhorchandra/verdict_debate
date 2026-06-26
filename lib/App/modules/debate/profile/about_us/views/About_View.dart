@@ -10,7 +10,7 @@ class AboutView extends GetView<AboutController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       appBar: const CommonAppBar(backgroundColor: Colors.transparent,title: "About Us"),
       body: SafeArea(
 

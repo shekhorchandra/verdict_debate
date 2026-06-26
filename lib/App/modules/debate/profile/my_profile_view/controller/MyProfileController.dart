@@ -6,7 +6,7 @@ class MyProfileController extends GetxController {
   var selectedTab = 0.obs;
 
   // Mock User Data
-  var username = "@tomal_ux".obs;
+  var username = "Tonoy_Saha".obs;
   var followers = "3455".obs;
   var debatesWon = "134".obs;
   var pollsCount = "86".obs;
@@ -51,7 +51,7 @@ class MyProfileController extends GetxController {
   // 3. Mock Data for Reposts Tab
   final List<Map<String, dynamic>> myReposts = [
     {
-      "repostedBy": "@tomal_ux",
+      "repostedBy": "Tonoy_Saha",
       "repostTime": "1 day ago",
       "originalUser": "@zara_debates",
       "originalTime": "Ends 1 week ago",

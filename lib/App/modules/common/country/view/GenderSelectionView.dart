@@ -9,7 +9,7 @@ class GenderSelectionView extends GetView<GenderSelectionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A091E), // Deep dark background
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -13,15 +13,16 @@ class OnboardingView extends GetView<OnboardingController> {
     // The requested button/indicator gradient
     final primaryGradient = LinearGradient(
       colors: [
+      AppColor.primaryScale.s600, // Blue 800
         AppColor.primaryScale.s500, // Indigo 500
-        AppColor.primaryScale.s800, // Blue 800
+
       ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     );
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       body: Stack(
         children: [
           // 1. BACKGROUND PAGEVIEW
@@ -55,7 +56,8 @@ class OnboardingView extends GetView<OnboardingController> {
                           // Lower Middle: Very dark indigo/black blend
                           Colors.black.withOpacity(0.8),
                           // Bottom: Solid black for text/button contrast
-                          Colors.black,
+                          // Colors.black,
+                          AppColor.primaryScale.s950.withOpacity(0.1),
                         ],
                         stops: const [0.0, 0.4, 0.7, 1.0],
                       ),
@@ -66,15 +68,15 @@ class OnboardingView extends GetView<OnboardingController> {
                   Positioned(
                     left: 30,
                     right: 30,
-                    bottom: 240,
+                    bottom: 230,
                     child: Column(
                       children: [
                         Text(
                           page['title']!,
                           textAlign: TextAlign.center,
                           style: AppText.h1.bold.copyWith(
-                            color: const Color(0xFFC7D2FE),
-                            fontSize: 28,
+                            color: const Color(0xFFA5B4FC),
+                            fontSize: 24,
                             letterSpacing: -0.5,
                           ),
                         ),

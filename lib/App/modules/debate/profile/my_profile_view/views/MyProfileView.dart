@@ -108,7 +108,7 @@ class MyProfileView extends GetView<MyProfileController> {
                   children: [
                     Row(
                       children: [
-                        Text("@tomal_ux", style: AppText.h4.bold.copyWith(color: Colors.white)),
+                        Text("Tonoy_Saha", style: AppText.h4.bold.copyWith(color: Colors.white)),
                         const SizedBox(width: 8),
                         const Text("🇧🇩", style: TextStyle(fontSize: 18)),
                       ],
@@ -255,7 +255,7 @@ class MyProfileView extends GetView<MyProfileController> {
             ],
           ),
           const SizedBox(height: 15),
-          _miniProfileHeader("@tomal_ux", "Ends 1 week ago", isDark: false),
+          _miniProfileHeader("Tonoy_Saha", "Ends 1 week ago", isDark: false),
           const SizedBox(height: 15),
           Text(
             "Should remote work be the default for tech companies?",
@@ -380,7 +380,7 @@ class MyProfileView extends GetView<MyProfileController> {
                   children: [
                     Row(
                       children: [
-                        Text("@tomal_ux", style: AppText.body1.bold),
+                        Text("Tonoy_Saha", style: AppText.body1.bold),
                         const SizedBox(width: 8),
                         const Icon(Icons.repeat, color: Color(0xFF6366F1), size: 16),
                         const SizedBox(width: 4),

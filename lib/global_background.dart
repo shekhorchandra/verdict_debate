@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'App/core/values/app_color.dart';
 
 class GlobalBackground extends StatelessWidget {
   final Widget child;
@@ -10,41 +8,69 @@ class GlobalBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Positioned(
-            top: -180,
-            left: -180,
-            child: _glowCircle(
-              500,
-              AppColor.primaryScale.s700.withOpacity(0.3),
-            ),
+      // The absolute darkest color of your background
+      backgroundColor: const Color(0xFF02010A),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF09071F), // Slightly lighter navy at top
+              Color(0xFF03020C), // Deep black-navy center
+              Color(0xFF05041A), // Subtle lift at bottom
+            ],
           ),
-          Positioned(
-            bottom: -300,
-            right: -200,
-            child: _glowCircle(
-              600,
-              AppColor.primaryScale.s500.withOpacity(0.3),
+        ),
+        child: Stack(
+          children: [
+            /// Top-left deep purple glow
+            Positioned(
+              top: -150,
+              left: -300,
+              child: _glowCircle(
+                600,
+                const Color(0xFF2C1654).withOpacity(0.4), // Muted purple
+              ),
             ),
-          ),
-          child,
-        ],
+
+            /// Bottom-right vibrant indigo glow (the most visible part)
+            Positioned(
+              bottom: -250,
+              right: -250,
+              child: _glowCircle(
+                650,
+                const Color(0xFF2C1654).withOpacity(0.01), // Vibrant indigo/navy
+              ),
+            ),
+
+            /// Content
+            SafeArea(
+              child: child,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _glowCircle(double size, Color color) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          center: Alignment.center,
-          radius: 0.8,
-          colors: [color, Colors.transparent],
+  static Widget _glowCircle(double size, Color color) {
+    return IgnorePointer(
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: RadialGradient(
+            center: Alignment.center,
+            radius: 0.7,
+            colors: [
+              color,
+              color.withOpacity(0.2),
+              Colors.transparent,
+            ],
+            stops: const [0.0, 0.4, 1.0],
+          ),
         ),
       ),
     );

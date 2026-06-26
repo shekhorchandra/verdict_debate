@@ -9,7 +9,7 @@ class BuyGiftsView extends GetView<BuyGiftsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent, // Matches the dark background
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       body: SafeArea(
         child: Column(
           children: [

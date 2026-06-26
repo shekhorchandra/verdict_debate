@@ -11,7 +11,7 @@ class MessagesView extends GetView<MessagesController> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color(0xFF0D0C1E),
+        backgroundColor: Colors.transparent, // Important for GlobalBackground
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,

@@ -9,7 +9,7 @@ class GemsShopView extends GetView<GemsShopController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A091E), // Deep dark background from design
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

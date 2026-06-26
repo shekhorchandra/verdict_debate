@@ -5,7 +5,7 @@ import '../../../../../../routes/app_routes.dart';
 
 class AccountSettingsController extends GetxController {
   // Controllers for the input fields
-  final usernameController = TextEditingController(text: "@tomal_ux");
+  final usernameController = TextEditingController(text: "Tonoy_Saha");
   final emailController = TextEditingController(text: "example123@gmail.com");
   final dobController = TextEditingController(text: "01/04/2001");
 

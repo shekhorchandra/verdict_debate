@@ -8,7 +8,7 @@ class ChatView extends GetView<ChatController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0C1E), // Dark background
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       appBar: _buildAppBar(),
       body: Column(
         children: [

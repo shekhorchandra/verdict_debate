@@ -9,7 +9,7 @@ class DeleteAccountView extends GetView<DeleteAccountController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0E28),
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       body: SafeArea(
         child: Column(
           children: [

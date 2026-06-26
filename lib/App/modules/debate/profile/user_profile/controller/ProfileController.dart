@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  var username = "@tomal_ux".obs;
+  var username = "Tonoy_Saha".obs;
   var followers = "3455".obs;
   var debatesWon = "134".obs;
   var polls = "86".obs;

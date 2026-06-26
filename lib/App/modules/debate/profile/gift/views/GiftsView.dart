@@ -10,7 +10,7 @@ class GiftsView extends GetView<GiftsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent, // Important for GlobalBackground
       body: SafeArea(
         child: Column(
           children: [
