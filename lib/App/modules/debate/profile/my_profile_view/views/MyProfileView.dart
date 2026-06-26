@@ -97,8 +97,8 @@ class MyProfileView extends GetView<MyProfileController> {
                   border: Border.all(color: const Color(0xFF818CF8), width: 2),
                 ),
                 child: const CircleAvatar(
-                  radius: 45,
-                  backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=1'),
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/tonoy.jpg'),
                 ),
               ),
               const SizedBox(width: 15),
