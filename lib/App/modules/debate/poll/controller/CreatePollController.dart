@@ -2,46 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreatePollController extends GetxController {
-  var selectedTab = 0.obs; // 0 for Poll, 1 for Go Live
-  var argumentText = "".obs;
-  var selectedPosition = "".obs;
-  var selectedDuration = "10m".obs; // Default duration
+  // 0 = Poll, 1 = Go Live
+  var selectedTab = 0.obs;
 
-  List<String> get tips {
-    if (selectedTab.value == 0) {
-      return [
-        "Ask clear, thought-provoking questions",
-        "Present a balanced argument",
-        "Use media to support your point",
-        "Keep it respectful and engaging",
-      ];
-    } else {
-      return [
-        "Choose a clear, debatable topic",
-        "Be respectful to your opponent",
-        "Present strong arguments",
-        "Engage with your audience",
-      ];
-    }
-  }
+  // --- Poll Specific State ---
+  var currentPollIndicator = 0.obs; // For the dots below the grey card
+  var selectedAddon = 2.obs; // Default to 'Background' (index 2)
 
-  final TextEditingController textController = TextEditingController();
+  // --- Go Live Specific State ---
+  var selectedPosition = "Support".obs; // Default position
+  var selectedDuration = "15m".obs; // Default debate duration
+  var argumentText = "".obs; // To track character count if needed
 
-  final List<String> durations = ["10m", "15m", "30m", "45m", "60m", "75m"];
-  final List<String> proDurations = ["30m", "45m", "60m", "75m"];
+  final TextEditingController debateInputController = TextEditingController();
 
-  void updateText(String val) => argumentText.value = val;
-  void selectPosition(String pos) => selectedPosition.value = pos;
-  void selectDuration(String dur) => selectedDuration.value = dur;
+  // Change between Poll and Go Live tabs
   void changeTab(int index) {
     selectedTab.value = index;
-    textController.clear();
-    argumentText.value = "";
+  }
+
+  // Update the Carousel indicator (dots)
+  void updateIndicator(int index) {
+    currentPollIndicator.value = index;
+  }
+
+  // Select Text, Media, or Background addon
+  void selectAddon(int index) {
+    selectedAddon.value = index;
+  }
+
+  // Set position (Against / Support)
+  void setPosition(String pos) {
+    selectedPosition.value = pos;
+  }
+
+  // Set duration (10m, 15m, etc.)
+  void setDuration(String dur) {
+    selectedDuration.value = dur;
   }
 
   @override
   void onClose() {
-    textController.dispose();
+    debateInputController.dispose();
     super.onClose();
+  }
+
+  // Function to handle the final post/start logic
+  void handleAction() {
+    if (selectedTab.value == 0) {
+      // Logic for posting a poll
+      Get.snackbar("Success", "Poll posted successfully!");
+    } else {
+      // Logic for starting a live debate
+      Get.snackbar("Debate", "Searching for opponent...");
+    }
   }
 }
