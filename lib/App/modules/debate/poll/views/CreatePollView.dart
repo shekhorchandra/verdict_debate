@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/values/app_text.dart';
 import '../../../../core/widgets/common_app_bar.dart';
@@ -12,14 +13,16 @@ class CreatePollView extends GetView<CreatePollController> {
     return Scaffold(
       backgroundColor: Colors.transparent, // Important for GlobalBackground
       appBar: CommonAppBar(
-      backgroundColor: Colors.transparent,
-      showBack: true,
-      // Using titleWidget to handle the dynamic title from GetX controller
-      titleWidget: Obx(() => Text(
-        controller.selectedTab.value == 0 ? "Create Poll" : "Go Live",
-        style: AppText.h4.semiBold.copyWith(color: Colors.white),
-      )),
-    ),
+        backgroundColor: Colors.transparent,
+        showBack: true,
+        // Using titleWidget to handle the dynamic title from GetX controller
+        titleWidget: Obx(
+          () => Text(
+            controller.selectedTab.value == 0 ? "Create Poll" : "Go Live",
+            style: AppText.h4.semiBold.copyWith(color: Colors.white),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -74,17 +77,26 @@ class CreatePollView extends GetView<CreatePollController> {
   Widget _buildPollPreview() {
     return Center(
       child: Container(
-        height: 360, width: Get.width * 0.9,
-        decoration: BoxDecoration(color: const Color(0xFF71717A), borderRadius: BorderRadius.circular(20)),
+        height: 360,
+        width: Get.width * 0.9,
+        decoration: BoxDecoration(
+          color: const Color(0xFF71717A),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Text("Is Coffee\nyour go-to\nmorning fix?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900)
+                  Text(
+                    "Is Coffee\nyour go-to\nmorning fix?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                   SizedBox(height: 20),
                   Icon(Icons.coffee, color: Colors.white, size: 60),
@@ -92,16 +104,25 @@ class CreatePollView extends GetView<CreatePollController> {
               ),
             ),
             Positioned(
-              bottom: 20, left: 0, right: 0,
+              bottom: 20,
+              left: 0,
+              right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(5, (i) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: 8, height: 8,
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: i == 0 ? const Color(0xFF6366F1) : Colors.white54),
-                )),
+                children: List.generate(
+                  5,
+                  (i) => Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: i == 0 ? const Color(0xFF6366F1) : Colors.white54,
+                    ),
+                  ),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -133,15 +154,38 @@ class CreatePollView extends GetView<CreatePollController> {
           decoration: BoxDecoration(
             color: const Color(0xFF1E1B4B).withOpacity(0.4),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: isSelected ? const Color(0xFF6366F1) : Colors.white10),
+            border: Border.all(
+              color: isSelected ? const Color(0xFF6366F1) : Colors.white10,
+            ),
           ),
           child: Column(
             children: [
               icon is String
-                  ? Text(icon, style: TextStyle(color: isSelected ? const Color(0xFF6366F1) : Colors.white, fontSize: 22, fontWeight: FontWeight.bold))
-                  : Icon(icon, color: isSelected ? const Color(0xFF6366F1) : Colors.white, size: 24),
+                  ? Text(
+                      icon,
+                      style: TextStyle(
+                        color: isSelected
+                            ? const Color(0xFF6366F1)
+                            : Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      color: isSelected
+                          ? const Color(0xFF6366F1)
+                          : Colors.white,
+                      size: 24,
+                    ),
               const SizedBox(height: 8),
-              Text(label, style: TextStyle(color: isSelected ? const Color(0xFF6366F1) : Colors.white38, fontSize: 12)),
+              Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? const Color(0xFF6366F1) : Colors.white38,
+                  fontSize: 12,
+                ),
+              ),
             ],
           ),
         ),
@@ -167,7 +211,16 @@ class CreatePollView extends GetView<CreatePollController> {
           _buildPositionRow(),
           const SizedBox(height: 25),
 
-          Row(children: const [Icon(Icons.access_time, color: Colors.white, size: 18), SizedBox(width: 8), Text("Duration per opponent", style: TextStyle(color: Colors.white))]),
+          Row(
+            children: const [
+              Icon(Icons.access_time, color: Colors.white, size: 18),
+              SizedBox(width: 8),
+              Text(
+                "Duration per opponent",
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
           const SizedBox(height: 15),
           _buildDurationGrid(),
           const SizedBox(height: 25),
@@ -175,7 +228,10 @@ class CreatePollView extends GetView<CreatePollController> {
           _buildTipsCard(),
           const SizedBox(height: 25),
 
-          _mainActionBtn("Find Opponent & Start Debate", Icons.bar_chart_rounded),
+          _mainActionBtn(
+            "Find Opponent & Start Debate",
+            Icons.bar_chart_rounded,
+          ),
         ],
       ),
     );
@@ -183,11 +239,19 @@ class CreatePollView extends GetView<CreatePollController> {
 
   Widget _buildDebateInput() {
     return Container(
-      height: 140, padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: const Color(0xFFE0E7FF), borderRadius: BorderRadius.circular(12)),
+      height: 140,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE0E7FF),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: const TextField(
-        maxLines: 4, style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(hintText: "What will you debate about?", border: InputBorder.none),
+        maxLines: 4,
+        style: TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+          hintText: "What will you debate about?",
+          border: InputBorder.none,
+        ),
       ),
     );
   }
@@ -211,7 +275,15 @@ class CreatePollView extends GetView<CreatePollController> {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: color, width: 2),
         ),
-        child: Center(child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -219,8 +291,13 @@ class CreatePollView extends GetView<CreatePollController> {
   Widget _buildDurationGrid() {
     final list = ["10m", "15m", "30m", "45m", "60m", "75m"];
     return Wrap(
-      spacing: 10, runSpacing: 12,
-      children: list.map((dur) => _durItem(dur, ["30m","45m","60m","75m"].contains(dur))).toList(),
+      spacing: 10,
+      runSpacing: 12,
+      children: list
+          .map(
+            (dur) => _durItem(dur, ["30m", "45m", "60m", "75m"].contains(dur)),
+          )
+          .toList(),
     );
   }
 
@@ -229,11 +306,32 @@ class CreatePollView extends GetView<CreatePollController> {
       clipBehavior: Clip.none,
       children: [
         Container(
-          width: (Get.width - 64) / 3, height: 45,
-          decoration: BoxDecoration(color: const Color(0xFF252348), borderRadius: BorderRadius.circular(8)),
-          child: Center(child: Text(l, style: const TextStyle(color: Colors.white70))),
+          width: (Get.width - 64) / 3,
+          height: 45,
+          decoration: BoxDecoration(
+            color: const Color(0xFF252348),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Text(l, style: const TextStyle(color: Colors.white70)),
+          ),
         ),
-        if (isPro) Positioned(top: -5, right: -3, child: Container(padding: const EdgeInsets.all(4), decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)), child: const Text("PRO", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold)))),
+        if (isPro)
+          Positioned(
+            top: -5,
+            right: -3,
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Text(
+                "PRO",
+                style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -241,28 +339,52 @@ class CreatePollView extends GetView<CreatePollController> {
   // ==================== SHARED REUSABLE COMPONENTS ====================
 
   Widget _buildCustomTabBar() {
-    return Obx(() => Row(
-      children: [
-        _tabItem("Poll", Icons.bar_chart_rounded, 0),
-        _tabItem("Go Live", Icons.bar_chart_rounded, 1),
-      ],
-    ));
+    return Obx(
+      () => Row(
+        children: [
+          _tabItem("Poll", 'assets/icons/poll.svg', 0),
+          _tabItem("Go Live", "assets/icons/live.svg", 1),
+        ],
+      ),
+    );
   }
 
-  Widget _tabItem(String title, IconData icon, int index) {
+  Widget _tabItem(String title, String iconPath, int index) {
     bool isActive = controller.selectedTab.value == index;
+
     return Expanded(
       child: GestureDetector(
         onTap: () => controller.changeTab(index),
         child: Column(
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Icon(icon, color: isActive ? const Color(0xFF818CF8) : Colors.white38, size: 20),
-              const SizedBox(width: 8),
-              Text(title, style: TextStyle(color: isActive ? Colors.white : Colors.white38, fontWeight: FontWeight.bold)),
-            ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconPath,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    isActive ? Colors.white : Colors.white38,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: isActive ? Colors.white : Colors.white38,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 10),
-            Container(height: 2, margin: const EdgeInsets.symmetric(horizontal: 10), color: isActive ? const Color(0xFF818CF8) : Colors.white10),
+            Container(
+              height: 2,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              color: isActive ? const Color(0xFF818CF8) : Colors.white10,
+            ),
           ],
         ),
       ),
@@ -274,14 +396,41 @@ class CreatePollView extends GetView<CreatePollController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: const Color(0xFF1E1B4B).withOpacity(0.4), borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.white10)),
-        child: Row(children: [
-          Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: const Color(0xFF6366F1), borderRadius: BorderRadius.circular(8)), child: const Icon(Icons.rocket_launch, color: Colors.white, size: 20)),
-          const SizedBox(width: 15),
-          const Text("Boost Poll", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          const Spacer(),
-          const Icon(Icons.arrow_forward_ios, color: Colors.white38, size: 14),
-        ]),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1E1B4B).withOpacity(0.4),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white10),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF6366F1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(
+                Icons.rocket_launch,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 15),
+            const Text(
+              "Boost Poll",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white38,
+              size: 14,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -290,13 +439,29 @@ class CreatePollView extends GetView<CreatePollController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        width: double.infinity, height: 56,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)])),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-          const SizedBox(width: 10),
-          Icon(icon, color: Colors.white, size: 20),
-        ]),
+        width: double.infinity,
+        height: 56,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: const LinearGradient(
+            colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Icon(icon, color: Colors.white, size: 20),
+          ],
+        ),
       ),
     );
   }
@@ -305,12 +470,21 @@ class CreatePollView extends GetView<CreatePollController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         if (hasInfo)
           GestureDetector(
             onTap: () => _showTipsPopup(), // Trigger the popup
             child: const Padding(
-              padding: EdgeInsets.all(4.0), // Padding to make it easier to click
+              padding: EdgeInsets.all(
+                4.0,
+              ), // Padding to make it easier to click
               child: Icon(Icons.info_outline, color: Colors.white54, size: 20),
             ),
           ),
@@ -318,19 +492,53 @@ class CreatePollView extends GetView<CreatePollController> {
     );
   }
 
-  Widget _subLabel(String t) => Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4), child: Text(t, style: const TextStyle(color: Colors.white38, fontSize: 13)));
+  Widget _subLabel(String t) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+    child: Text(t, style: const TextStyle(color: Colors.white38, fontSize: 13)),
+  );
 
   Widget _buildTipsCard() {
     return Container(
-      padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: const Color(0xFF252348), borderRadius: BorderRadius.circular(16)),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
-        Row(children: [Icon(Icons.lightbulb_outline, color: Colors.amber, size: 18), SizedBox(width: 8), Text("Tips for a Great Debate", style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold))]),
-        SizedBox(height: 12),
-        Text("• Choose a clear, debatable topic", style: TextStyle(color: Colors.white54, fontSize: 13)),
-        Text("• Be respectful to your opponent", style: TextStyle(color: Colors.white54, fontSize: 13)),
-        Text("• Present strong arguments", style: TextStyle(color: Colors.white54, fontSize: 13)),
-        Text("• Engage with your audience", style: TextStyle(color: Colors.white54, fontSize: 13)),
-      ]),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF252348),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Row(
+            children: [
+              Icon(Icons.lightbulb_outline, color: Colors.amber, size: 18),
+              SizedBox(width: 8),
+              Text(
+                "Tips for a Great Debate",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Text(
+            "• Choose a clear, debatable topic",
+            style: TextStyle(color: Colors.white54, fontSize: 13),
+          ),
+          Text(
+            "• Be respectful to your opponent",
+            style: TextStyle(color: Colors.white54, fontSize: 13),
+          ),
+          Text(
+            "• Present strong arguments",
+            style: TextStyle(color: Colors.white54, fontSize: 13),
+          ),
+          Text(
+            "• Engage with your audience",
+            style: TextStyle(color: Colors.white54, fontSize: 13),
+          ),
+        ],
+      ),
     );
   }
 
@@ -357,7 +565,11 @@ class CreatePollView extends GetView<CreatePollController> {
                   SizedBox(width: 12),
                   Text(
                     "Tips for a Great Poll",
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -376,9 +588,12 @@ class CreatePollView extends GetView<CreatePollController> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () => Get.back(),
-                  child: const Text("Got it", style: TextStyle(color: Color(0xFF818CF8))),
+                  child: const Text(
+                    "Got it",
+                    style: TextStyle(color: Color(0xFF818CF8)),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -387,21 +602,30 @@ class CreatePollView extends GetView<CreatePollController> {
     );
   }
 
-// Helper to build individual bullet points
+  // Helper to build individual bullet points
   Widget _tipItem(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("• ",
-              style: TextStyle(color: Colors.white70, fontSize: 18, fontWeight: FontWeight.bold)
+          const Text(
+            "• ",
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 14,
+                height: 1.4,
+              ),
             ),
           ),
         ],
@@ -414,7 +638,14 @@ class CreatePollView extends GetView<CreatePollController> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(t, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(
+          t,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         if (hasInfo)
           GestureDetector(
             onTap: _showTipsPopup, // <--- Link to your function
