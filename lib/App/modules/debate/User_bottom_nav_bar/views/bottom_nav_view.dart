@@ -99,7 +99,7 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
     bool isSelected = controller.selectedIndex.value == index;
     // Highlight color (s400) or inactive color (s400 with opacity)
     Color color = isSelected
-        ? AppColor.primaryScale.s400
+        ? AppColor.primaryScale.s50
         : AppColor.primaryScale.s400.withOpacity(0.5);
 
     return GestureDetector(
