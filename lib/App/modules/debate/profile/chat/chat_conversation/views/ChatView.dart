@@ -132,17 +132,28 @@ class ChatView extends GetView<ChatController> {
               ),
             ),
           ),
-          const Icon(Icons.attach_file, color: Color(0xFF818CF8)),
+          const Icon(Icons.attach_file, color: Color(0xFF6366F1)),
           const SizedBox(width: 12),
           GestureDetector(
             onTap: controller.sendMessage,
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFF6366F1), // Send button color
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF6366F1),
+                    Color(0xFF4338CA),
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(Icons.near_me, color: Colors.white, size: 20),
+              child: const Icon(
+                Icons.near_me,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
         ],

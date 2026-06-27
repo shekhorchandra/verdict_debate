@@ -110,32 +110,85 @@ class AccountSettingsView extends GetView<AccountSettingsController> {
   }
 
   Widget _buildActionLinks() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-          onTap: controller.changePassword,
-          child: const Text(
-            "Change Password",
-            style: TextStyle(
-              color: Color(0xFF818CF8),
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w500,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF050514),
+        borderRadius: BorderRadius.circular(0),
+      ),
+      child: Column(
+        children: [
+          _actionLinkTile(
+            icon: Icons.key_outlined,
+            title: "Change Password",
+            onTap: controller.changePassword,
           ),
-        ),
-        GestureDetector(
-          onTap: controller.deleteAccount,
-          child: const Text(
-            "Delete Account",
-            style: TextStyle(
-              color: Color(0xFF818CF8),
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w500,
-            ),
+
+          _actionDivider(),
+
+          _actionLinkTile(
+            icon: Icons.person_outline,
+            title: "Pause Account",
+            onTap: controller.pauseAccount,
           ),
+
+          _actionDivider(),
+
+          _actionLinkTile(
+            icon: Icons.do_not_disturb_alt_outlined,
+            title: "Delete Account",
+            onTap: controller.deleteAccount,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _actionLinkTile({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: const Color(0xFF818CF8),
+              size: 22,
+            ),
+            const SizedBox(width: 8),
+
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  color: Color(0xFF818CF8),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Color(0xFF818CF8),
+              size: 12,
+            ),
+          ],
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _actionDivider() {
+    return Divider(
+      height: 1,
+      thickness: 1,
+      color: Colors.white.withOpacity(0.12),
     );
   }
 }

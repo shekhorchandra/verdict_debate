@@ -36,10 +36,16 @@ class MessagesView extends GetView<MessagesController> {
             _buildSearchField(),
             TabBar(
               onTap: (index) => controller.changeTab(index),
-              indicatorColor: const Color(0xFF8B8CF1),
+
+              indicatorColor: const Color(0xFF818CF8),
+              indicatorSize: TabBarIndicatorSize.tab,
+
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white.withOpacity(0.4),
-              tabs: const [Tab(text: "Inbox"), Tab(text: "Requests")],
+              tabs: const [
+                Tab(text: "Inbox"),
+                Tab(text: "Requests"),
+              ],
             ),
             const Divider(height: 1, color: Colors.white10),
             Expanded(
@@ -62,9 +68,11 @@ class MessagesView extends GetView<MessagesController> {
       padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF262450).withOpacity(0.5),
+          color: const Color(0xFF1D1B4D),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFF3B3870)),
+          border: Border.all(
+            color: const Color(0xFF6366F1),
+          ),
         ),
         child: const TextField(
           style: TextStyle(color: Colors.white),
@@ -73,6 +81,13 @@ class MessagesView extends GetView<MessagesController> {
             hintStyle: TextStyle(color: Colors.white38),
             prefixIcon: Icon(Icons.search, color: Colors.white38),
             border: InputBorder.none,
+
+            // middle align
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 14,
+              horizontal: 12,
+            ),
           ),
         ),
       ),

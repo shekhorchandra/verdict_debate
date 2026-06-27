@@ -209,27 +209,40 @@ class BuyGiftsView extends GetView<BuyGiftsController> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Obx(() {
         bool hasSelection = controller.selectedIndex.value != -1;
+
         return Container(
           width: double.infinity,
           height: 56,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            gradient: LinearGradient(
-              colors: hasSelection
-                  ? [const Color(0xFF818CF8), const Color(0xFF4F46E5)]
-                  : [
+            gradient: hasSelection
+                ? const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF6366F1),
+                Color(0xFF3730A3),
+              ],
+            )
+                : LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
                 const Color(0xFFC7D2FE).withOpacity(0.5),
                 const Color(0xFFC7D2FE).withOpacity(0.5),
               ],
             ),
           ),
           child: ElevatedButton(
-            // UPDATED: Now calls the popup instead of controller.onBuyNow
             onPressed: hasSelection ? () => _showPurchasePopup() : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
+              disabledBackgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              disabledForegroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
             child: Text(
               "Buy Now",

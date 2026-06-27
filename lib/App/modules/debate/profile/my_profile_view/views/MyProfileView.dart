@@ -82,7 +82,14 @@ class MyProfileView extends GetView<MyProfileController> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withOpacity(0.6),
+        gradient: const LinearGradient(
+          begin: Alignment.centerRight,
+          end: Alignment.centerLeft,
+          colors: [
+            Color(0xFF242260),
+            Color(0xFF44418B),
+          ],
+        ),
         borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
@@ -94,7 +101,10 @@ class MyProfileView extends GetView<MyProfileController> {
                 padding: const EdgeInsets.all(3),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFF818CF8), width: 2),
+                  border: Border.all(
+                    color: const Color(0xFF818CF8),
+                    width: 2,
+                  ),
                 ),
                 child: const CircleAvatar(
                   radius: 50,
@@ -108,7 +118,10 @@ class MyProfileView extends GetView<MyProfileController> {
                   children: [
                     Row(
                       children: [
-                        Text("Tonoy_Saha", style: AppText.h4.bold.copyWith(color: Colors.white)),
+                        Text(
+                          "Tonoy_Saha",
+                          style: AppText.h4.bold.copyWith(color: Colors.white),
+                        ),
                         const SizedBox(width: 8),
                         const Text("🇧🇩", style: TextStyle(fontSize: 18)),
                       ],
@@ -119,7 +132,14 @@ class MyProfileView extends GetView<MyProfileController> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6366F1),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFF6366F1),
+                              Color(0xFF3730A3),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
@@ -127,10 +147,16 @@ class MyProfileView extends GetView<MyProfileController> {
                           children: [
                             Text(
                               "Edit Profile",
-                              style: AppText.label.bold.copyWith(color: Colors.white),
+                              style: AppText.label.bold.copyWith(
+                                color: Colors.white,
+                              ),
                             ),
                             const SizedBox(width: 5),
-                            const Icon(Icons.edit, color: Colors.white, size: 14),
+                            const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 14,
+                            ),
                           ],
                         ),
                       ),
@@ -140,14 +166,25 @@ class MyProfileView extends GetView<MyProfileController> {
               ),
               Row(
                 children: [
-                  const Icon(Icons.workspace_premium, color: Colors.white70, size: 16),
+                  const Icon(
+                    Icons.workspace_premium,
+                    color: Colors.white70,
+                    size: 16,
+                  ),
                   const SizedBox(width: 4),
-                  Text("Free", style: AppText.label().copyWith(color: Colors.white70)),
+                  Text(
+                    "Free",
+                    style: AppText.label().copyWith(color: Colors.white70),
+                  ),
                 ],
               ),
             ],
           ),
-          const SizedBox(height: 25),
+          const Divider(
+            height: 25,
+            thickness: 1.3,
+            color: Colors.white10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -174,8 +211,8 @@ class MyProfileView extends GetView<MyProfileController> {
   Widget _buildCustomTabBar() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.white10, width: 1)),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: const Color(0xFF1E1B4B).withOpacity(0.8), width: 1)),
       ),
       child: Obx(
         () => Row(
@@ -222,7 +259,12 @@ class MyProfileView extends GetView<MyProfileController> {
 
             const SizedBox(height: 8),
 
-            Container(height: 2, color: isActive ? AppColor.primaryScale.s300 : Colors.white10),
+            Container(
+              height: 2,
+              color: isActive
+                  ? const Color(0xFF6366F1)
+                  : Colors.white10,
+            ),
           ],
         ),
       ),
@@ -543,12 +585,23 @@ class MyProfileView extends GetView<MyProfileController> {
     padding: const EdgeInsets.symmetric(vertical: 10),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: const Color(0xFF6366F1),
+      gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xFF6366F1),
+          Color(0xFF3730A3),
+        ],
+      ),
     ),
     child: Center(
       child: Text(
         label,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
       ),
     ),
   );
@@ -610,24 +663,36 @@ class MyProfileView extends GetView<MyProfileController> {
     padding: const EdgeInsets.symmetric(vertical: 12),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(12),
-      gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)]),
-    ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "Watch The Debate",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(width: 8),
-          // FIX: Use SvgPicture because AppAssets contains string paths
-          SvgPicture.asset(
-            AppAssets.debate, // or AppAssets.war if that is the correct key
-            height: 16,
-            width: 16,
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-          ),
+      gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xFF6366F1),
+          Color(0xFF3730A3),
         ],
       ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "Watch The Debate",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(width: 8),
+        SvgPicture.asset(
+          AppAssets.debate,
+          height: 16,
+          width: 16,
+          colorFilter: const ColorFilter.mode(
+            Colors.white,
+            BlendMode.srcIn,
+          ),
+        ),
+      ],
+    ),
   );
 }

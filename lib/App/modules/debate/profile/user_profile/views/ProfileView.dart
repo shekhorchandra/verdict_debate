@@ -146,12 +146,14 @@ class ProfileView extends GetView<ProfileController> {
             _actionBtn(
               Icons.card_giftcard,
               "Gifts",
+              useGradient: false,
               onTap: () => Get.toNamed(AppRoutes.GIFT),
             ),
             const SizedBox(width: 12),
             _actionBtn(
               Icons.diamond_outlined,
               "Gems Shop",
+              useGradient: false,
               onTap: () => Get.toNamed(AppRoutes.GEMS_SHOP),
             ),
           ],
@@ -161,11 +163,12 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   Widget _actionBtn(
-    IconData icon,
-    String label, {
-    bool hasArrow = false,
-    VoidCallback? onTap,
-  }) {
+      IconData icon,
+      String label, {
+        bool hasArrow = false,
+        bool useGradient = true,
+        VoidCallback? onTap,
+      }) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -173,7 +176,18 @@ class ProfileView extends GetView<ProfileController> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
           decoration: BoxDecoration(
-            color: const Color(0xFF252348), // Translucent indigo
+            color: useGradient ? null : const Color(0xFF252348),
+            gradient: useGradient
+                ? const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF44418B),
+                Color(0xFF242260),
+
+              ],
+            )
+                : null,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -189,7 +203,7 @@ class ProfileView extends GetView<ProfileController> {
                 const Spacer(),
                 const Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.white38,
+                  color: Colors.white,
                   size: 12,
                 ),
               ],
@@ -209,7 +223,14 @@ class ProfileView extends GetView<ProfileController> {
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: AppColor.primaryScale.s900.withOpacity(0.5),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF242260),
+              Color(0xFF44418B),
+            ],
+          ),
           borderRadius: BorderRadius.circular(32),
         ),
         child: Row(
@@ -235,7 +256,7 @@ class ProfileView extends GetView<ProfileController> {
                 Row(
                   children: [
                     Obx(
-                      () => Text(
+                          () => Text(
                         controller.username.value,
                         style: AppText.body1.bold.copyWith(color: Colors.white),
                       ),
@@ -294,12 +315,17 @@ class ProfileView extends GetView<ProfileController> {
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF3B2D60), Color(0xFF6366F1)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF383482),
+              Color(0xFF4A216E),
+            ],
           ),
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         child: Row(
-          children: const [
+          children: [
             Icon(Icons.diamond, color: Color(0xFFC7D2FE), size: 30),
             SizedBox(width: 15),
             Text("Get Premium", style: TextStyle(color: Colors.white)),
@@ -314,10 +340,31 @@ class ProfileView extends GetView<ProfileController> {
   Widget _buildSettingGroup(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF252348).withOpacity(0.6),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomLeft,
+          colors: [
+            Color(0xFF44418B),
+            Color(0xFF242137),
+          ],
+        ),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Column(children: children),
+      child: Column(
+        children: [
+          for (int i = 0; i < children.length; i++) ...[
+            children[i],
+            if (i != children.length - 1)
+              Divider(
+                height: 1,
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.white.withOpacity(0.12),
+              ),
+          ],
+        ],
+      ),
     );
   }
 
@@ -344,7 +391,12 @@ class ProfileView extends GetView<ProfileController> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         gradient: const LinearGradient(
-          colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [
+            Color(0xFF3730A3),
+            Color(0xFF6366F1),
+          ],
         ),
       ),
       child: ElevatedButton(

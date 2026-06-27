@@ -69,14 +69,25 @@ class WithdrawView extends GetView<WithdrawController> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withOpacity(0.6),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF44418B),
+            Color(0xFF242260),
+          ],
+        ),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Gift Values", style: AppText.body2.medium.copyWith(color: Colors.white70)),
+          Text(
+            "Gift Values",
+            style: AppText.body2.medium.copyWith(color: Colors.white70),
+          ),
           const SizedBox(height: 12),
+
           // Gift Legend
           Container(
             padding: const EdgeInsets.all(12),
@@ -92,13 +103,18 @@ class WithdrawView extends GetView<WithdrawController> {
                   .toList(),
             ),
           ),
+
           const SizedBox(height: 20),
+
           // Conversion Inputs
           Row(
             children: [
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 15,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -107,17 +123,27 @@ class WithdrawView extends GetView<WithdrawController> {
                     children: [
                       const Text(
                         "🎤 3x",
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const Spacer(),
-                      const Icon(Icons.arrow_drop_down, color: Colors.white70),
+                      const Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white70,
+                      ),
                     ],
                   ),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Icon(Icons.compare_arrows, color: Colors.white54, size: 28),
+                child: Icon(
+                  Icons.compare_arrows,
+                  color: Colors.white54,
+                  size: 28,
+                ),
               ),
               Expanded(
                 child: Container(
@@ -140,6 +166,7 @@ class WithdrawView extends GetView<WithdrawController> {
               ),
             ],
           ),
+
           const SizedBox(height: 20),
           _gradientButton("Convert", controller.onConvert),
         ],
@@ -165,7 +192,14 @@ class WithdrawView extends GetView<WithdrawController> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withOpacity(0.6),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF44418B),
+            Color(0xFF242260),
+          ],
+        ),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -181,7 +215,10 @@ class WithdrawView extends GetView<WithdrawController> {
               children: [
                 RichText(
                   text: TextSpan(
-                    style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+                    style: TextStyle(
+                      color: Colors.grey.shade500,
+                      fontSize: 14,
+                    ),
                     children: [
                       const TextSpan(text: "Available Funds: "),
                       TextSpan(
@@ -214,7 +251,12 @@ class WithdrawView extends GetView<WithdrawController> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFF44418B), Color(0xFF242137)]),
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFF44418B),
+            Color(0xFF242137),
+          ],
+        ),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -225,33 +267,74 @@ class WithdrawView extends GetView<WithdrawController> {
               color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(Icons.account_balance, color: Colors.white, size: 24),
+            child: const Icon(
+              Icons.account_balance,
+              color: Colors.white,
+              size: 24,
+            ),
           ),
+
           const SizedBox(width: 12),
+
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Bank of USA ************55465",
-                  style: TextStyle(color: Colors.white70, fontSize: 12),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+            child: Text(
+              "Bank of USA 1234****55465",
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 12,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6366F1),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            child: const Row(
-              children: [
-                Text("Edit ", style: TextStyle(color: Colors.white, fontSize: 12)),
-                Icon(Icons.edit, color: Colors.white, size: 14),
-              ],
+
+          const SizedBox(width: 8),
+
+          SizedBox(
+            height: 34,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF6366F1),
+                    Color(0xFF3730A3),
+                  ],
+                ),
+              ),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Edit",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                      size: 13,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -294,7 +377,7 @@ class WithdrawView extends GetView<WithdrawController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Your withdrawal amount has been successfully debited to your payout account ***********55465",
+                  "Your withdrawal amount has been successfully debited to your payout account 1234****55465",
                   style: TextStyle(color: Colors.white, fontSize: 11, height: 1.4),
                 ),
               ],
@@ -313,7 +396,14 @@ class WithdrawView extends GetView<WithdrawController> {
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)]),
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF6366F1),
+            Color(0xFF3730A3),
+          ],
+        ),
       ),
       child: ElevatedButton(
         onPressed: onTap,

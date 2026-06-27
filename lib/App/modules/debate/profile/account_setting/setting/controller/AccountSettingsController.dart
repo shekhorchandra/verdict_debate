@@ -13,6 +13,10 @@ class AccountSettingsController extends GetxController {
     Get.toNamed(AppRoutes.CHANGE_PASSWORD);
   }
 
+  void pauseAccount() {
+    Get.toNamed(AppRoutes.PAUSE_ACCOUNT);
+  }
+
   void deleteAccount() {
     Get.toNamed(AppRoutes.DELETE_ACCOUNT);
   }

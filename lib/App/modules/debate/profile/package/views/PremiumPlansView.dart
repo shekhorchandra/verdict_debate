@@ -167,7 +167,14 @@ class PremiumPlansView extends GetView<PremiumPlansController> {
               borderRadius: BorderRadius.circular(16),
               gradient: isCurrentPlan
                   ? null
-                  : const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4338CA)]),
+                  : const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF6366F1),
+                  Color(0xFF3730A3),
+                ],
+              ),
               color: isCurrentPlan ? Colors.white.withOpacity(0.1) : null,
             ),
             child: ElevatedButton(

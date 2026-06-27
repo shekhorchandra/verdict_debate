@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/values/app_text.dart';
-import '../controller/DeleteAccountController.dart';
+import '../controller/PauseAccountController.dart';
 
-class DeleteAccountView extends GetView<DeleteAccountController> {
-  const DeleteAccountView({super.key});
+class PauseAccountView extends GetView<PauseAccountController> {
+  const PauseAccountView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,14 @@ class DeleteAccountView extends GetView<DeleteAccountController> {
                   children: [
                     const SizedBox(height: 20),
                     Text(
-                      "Are you sure you want to permanently delete your account?",
+                      "Are you sure you want to permanently temporarily pause your account?",
                       style: AppText.h3.bold.copyWith(color: Colors.white, height: 1.3),
                     ),
                     const SizedBox(height: 20),
                     _buildWarningSection(),
                     const SizedBox(height: 40),
                     Text(
-                      "Type \"YES\" to proceed with account deletion.",
+                      "Type \"YES\" to confirm and pause your account.",
                       style: AppText.body2.medium.copyWith(color: Colors.white),
                     ),
                     const SizedBox(height: 15),
@@ -63,7 +63,7 @@ class DeleteAccountView extends GetView<DeleteAccountController> {
             ),
           ),
           const Spacer(),
-          Text("Delete Account", style: AppText.h5.bold.copyWith(color: Colors.white)),
+          Text("Pause Your Account", style: AppText.h5.bold.copyWith(color: Colors.white)),
           const Spacer(),
           const SizedBox(width: 40),
         ],
@@ -79,7 +79,7 @@ class DeleteAccountView extends GetView<DeleteAccountController> {
         const SizedBox(width: 10),
         Expanded(
           child: Text(
-            "This action cannot be undone, and all your data will be lost.",
+            "This action will disable your account and you will not be able to interact with debates or polls. However, your data will remain intact and can be restored when you log back in.",
             style: AppText.label().copyWith(color: Colors.white70, height: 1.4),
           ),
         ),
@@ -140,7 +140,7 @@ class DeleteAccountView extends GetView<DeleteAccountController> {
             ),
           ),
           child: Text(
-            "Delete Account",
+            "Pause Account",
             style: AppText.body1.bold.copyWith(
               color: isActive ? Colors.white : Colors.white24,
             ),

@@ -87,29 +87,40 @@ class GiftsView extends GetView<GiftsController> {
 
   Widget _tabItem(String label, IconData icon, int index) {
     bool isSelected = controller.selectedTab.value == index;
-    return GestureDetector(
-      onTap: () => controller.changeTab(index),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: isSelected ? const Color(0xFF6366F1) : Colors.transparent,
-              width: 3,
-            ),
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: isSelected ? Colors.white : Colors.white54, size: 18),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: AppText.body2.medium.copyWith(
-                color: isSelected ? Colors.white : Colors.white54,
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => controller.changeTab(index),
+        behavior: HitTestBehavior.opaque,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: isSelected
+                    ? const Color(0xFF6366F1)
+                    : Colors.transparent,
+                width: 3,
               ),
             ),
-          ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: isSelected ? Colors.white : Colors.white54,
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                label,
+                style: AppText.body2.medium.copyWith(
+                  color: isSelected ? Colors.white : Colors.white54,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -170,12 +181,19 @@ class GiftsView extends GetView<GiftsController> {
           ),
           child: Column(
             children: [
-              Text(gift['icon'], style: const TextStyle(fontSize: 24)),
+              Text(
+                gift['icon'],
+                style: const TextStyle(fontSize: 24),
+              ),
               const SizedBox(height: 5),
               Text(
                 gift['name'],
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white70, fontSize: 8),
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 10, // increased
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -191,7 +209,11 @@ class GiftsView extends GetView<GiftsController> {
             ),
             child: Text(
               gift['count'],
-              style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 9,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -208,7 +230,14 @@ class GiftsView extends GetView<GiftsController> {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF4F46E5)]),
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF6366F1),
+              Color(0xFF3730A3),
+            ],
+          ),
         ),
         child: Center(
           child: Row(
@@ -279,18 +308,37 @@ class GiftsView extends GetView<GiftsController> {
               ),
 
               Stack(
-                alignment: Alignment.topRight,
+                clipBehavior: Clip.none,
                 children: [
-                  Text(icon, style: const TextStyle(fontSize: 24)),
-
-                  Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF6366F1),
-                      shape: BoxShape.circle,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, right: 4),
+                    child: Text(
+                      icon,
+                      style: const TextStyle(fontSize: 24),
                     ),
-                    child: const Text("5x", style: TextStyle(color: Colors.white, fontSize: 8)),
+                  ),
+
+                  Positioned(
+                    top: -4,
+                    right: -6,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 2,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF6366F1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Text(
+                        "5x",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -330,21 +378,14 @@ class GiftsView extends GetView<GiftsController> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF6366F1),
-            Color(0xFF4F46E5),
+            Color(0xFF44418B),
+            Color(0xFF242137),
           ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF6366F1).withOpacity(0.25),
-            blurRadius: 10,
-            offset: const Offset(0, 6),
-          ),
-        ],
       ),
       child: Row(
         children: [

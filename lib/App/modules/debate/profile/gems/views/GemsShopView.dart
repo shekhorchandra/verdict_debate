@@ -28,11 +28,11 @@ class GemsShopView extends GetView<GemsShopController> {
                     decoration: BoxDecoration(
                       color: const Color(0xFF252348).withOpacity(0.5),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFF6366F1).withOpacity(0.5)),
+                      border: Border.all(color: const Color(0xFF895CFD).withOpacity(0.5)),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.diamond_outlined, color: Color(0xFFA5B4FC), size: 20),
+                        const Icon(Icons.diamond_outlined, color: Color(0xFFAA9BF3), size: 20),
                         const SizedBox(width: 8),
                         Obx(() => Text(
                           "${controller.currentBalance.value}",
@@ -121,7 +121,7 @@ class GemsShopView extends GetView<GemsShopController> {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
+            colors: [Color(0xFF8944D7), Color(0xFF401F66)],
           ),
           borderRadius: BorderRadius.circular(28),
         ),

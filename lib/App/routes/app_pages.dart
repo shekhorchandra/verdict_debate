@@ -26,6 +26,8 @@ import '../modules/debate/profile/account_setting/change_password/bindings/Chang
 import '../modules/debate/profile/account_setting/change_password/views/ChangePasswordView.dart';
 import '../modules/debate/profile/account_setting/delete_account/bindings/DeleteAccountBinding.dart';
 import '../modules/debate/profile/account_setting/delete_account/views/DeleteAccountView.dart';
+import '../modules/debate/profile/account_setting/pause_account/bindings/PauseAccountBinding.dart';
+import '../modules/debate/profile/account_setting/pause_account/views/PauseAccountView.dart';
 import '../modules/debate/profile/account_setting/setting/bindings/AccountSettingsBinding.dart';
 import '../modules/debate/profile/account_setting/setting/views/AccountSettingsView.dart';
 import '../modules/debate/profile/buy_gift/bindings/BuyGiftsBinding.dart';
@@ -232,6 +234,13 @@ class AppPages {
       page: () => const DeleteAccountView(),
       binding: DeleteAccountBinding(),
     ),
+
+    GetPage(
+      name: AppRoutes.PAUSE_ACCOUNT,
+      page: () => const PauseAccountView(),
+      binding: PauseAccountBinding(),
+    ),
+
     GetPage(name: AppRoutes.ABOUT, page: () => const AboutView()),
     GetPage(
       name: AppRoutes.PRIVACY_POLICY,

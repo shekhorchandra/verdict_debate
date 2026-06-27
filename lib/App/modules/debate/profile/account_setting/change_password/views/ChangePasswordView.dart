@@ -26,6 +26,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       controller: controller.currentPassController,
                       isObscured: controller.isCurrentObscured,
                       onToggle: controller.toggleCurrent,
+                      hintText: "Enter current password",
                     ),
                     const SizedBox(height: 25),
                     _buildInputLabel("New Password"),
@@ -33,6 +34,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       controller: controller.newPassController,
                       isObscured: controller.isNewObscured,
                       onToggle: controller.toggleNew,
+                      hintText: "Enter new password",
                     ),
                     const SizedBox(height: 25),
                     _buildInputLabel("Confirm Password"),
@@ -40,6 +42,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       controller: controller.confirmPassController,
                       isObscured: controller.isConfirmObscured,
                       onToggle: controller.toggleConfirm,
+                      hintText: "Confirm new password",
                     ),
                     const SizedBox(height: 40),
                     _buildSaveButton(),
@@ -89,30 +92,46 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
     required TextEditingController controller,
     required RxBool isObscured,
     required VoidCallback onToggle,
+    required String hintText,
   }) {
-    return Obx(() => Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFE0E7FF), // Light lavender input bg
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: TextField(
-        controller: controller,
-        obscureText: isObscured.value,
-        style: const TextStyle(color: Color(0xFF1E1B4B), fontWeight: FontWeight.w600),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          suffixIcon: IconButton(
-            icon: Icon(
-              isObscured.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-              color: const Color(0xFF9BA3AF),
-              size: 22,
+    return Obx(
+          () => Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFE0E7FF),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: TextField(
+          controller: controller,
+          obscureText: isObscured.value,
+          style: const TextStyle(
+            color: Color(0xFF1E1B4B),
+            fontWeight: FontWeight.w600,
+          ),
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: const TextStyle(
+              color: Color(0xFF9BA3AF),
+              fontWeight: FontWeight.w400,
             ),
-            onPressed: onToggle,
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 18,
+            ),
+            suffixIcon: IconButton(
+              icon: Icon(
+                isObscured.value
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: const Color(0xFF9BA3AF),
+                size: 22,
+              ),
+              onPressed: onToggle,
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _buildSaveButton() {
@@ -122,8 +141,13 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: const LinearGradient(
-          colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
-        ),
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF6366F1),
+            Color(0xFF3730A3),
+          ],
+        )
       ),
       child: ElevatedButton(
         onPressed: controller.onSave,

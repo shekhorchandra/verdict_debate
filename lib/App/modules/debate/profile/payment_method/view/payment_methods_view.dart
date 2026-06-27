@@ -27,8 +27,17 @@ class PaymentMethodsView extends StatelessWidget {
         child: SingleChildScrollView(
           padding: EdgeInsets.all(8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Payment methods list
+
+              // Payment section text
+              Text(
+                'For Payment',
+                style: AppText.body1.bold.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 16),
               Obx(() {
                 final selected = controller.selectedPaymentMethod.value;
 
@@ -53,17 +62,18 @@ class PaymentMethodsView extends StatelessWidget {
                 );
               }),
 
+              const SizedBox(height: 4),
               // Add new card
               InkWell(
                 borderRadius: BorderRadius.circular(100),
                 onTap: () => Get.toNamed(AppRoutes.ADD_PAYMENT_METHOD),
                 child: DottedBorder(
                   options: RoundedRectDottedBorderOptions(
-                    radius: Radius.circular(100),
+                    radius: Radius.circular(16),
                     dashPattern: [15, 5],
                     strokeWidth: 2,
                     padding: EdgeInsets.all(20),
-                    color: Colors.white,
+                    color: Color(0xFF6366F1),
                   ),
                   child: Row(
                     children: [
@@ -77,6 +87,58 @@ class PaymentMethodsView extends StatelessWidget {
                   ),
                 ),
               ),
+
+              const SizedBox(height: 32),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'For Payout',
+                    style: AppText.body1.bold.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  Text(
+                    'Your earnings from live debate gifts can be withdrawn once you add your bank account details.',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () => Get.toNamed(AppRoutes.ADD_PAYMENT_METHOD),
+                    child: DottedBorder(
+                      options: RoundedRectDottedBorderOptions(
+                        radius: const Radius.circular(16),
+                        dashPattern: const [15, 5],
+                        strokeWidth: 2,
+                        padding: const EdgeInsets.all(20),
+                        color: const Color(0xFF6366F1),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.add_rounded,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Add bank account',
+                            style: AppText.body2.medium.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

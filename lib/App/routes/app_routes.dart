@@ -39,6 +39,7 @@ abstract class AppRoutes {
   static const ACCOUNT_SETTING = '/account-setting';
   static const CHANGE_PASSWORD = '/change-password';
   static const DELETE_ACCOUNT = '/delete-account';
+  static const PAUSE_ACCOUNT = '/pause-account';
   static const ABOUT = '/about';
   static const PRIVACY_POLICY = '/privacy-policy';
   static const TERMS_CONDITION = '/terms-condition';
