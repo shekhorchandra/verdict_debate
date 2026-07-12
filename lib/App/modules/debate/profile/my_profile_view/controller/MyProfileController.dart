@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../routes/app_routes.dart';
+
 class MyProfileController extends GetxController {
   // Current active tab (0: Polls, 1: Debates, 2: Reposts)
   var selectedTab = 0.obs;
@@ -68,14 +70,8 @@ class MyProfileController extends GetxController {
 
   /// Navigation to Edit Profile
   void editProfile() {
-    // Navigate to edit profile page
-    Get.snackbar(
-      "Profile",
-      "Opening Edit Profile Page...",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.indigo.withOpacity(0.8),
-      colorText: Colors.white,
-    );
+    // Navigate to the edit profile page
+    Get.toNamed(AppRoutes.EDIT_PROFILE);
   }
 
   /// Navigation for "View All" button

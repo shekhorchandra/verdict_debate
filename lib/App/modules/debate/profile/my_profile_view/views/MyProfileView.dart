@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:verdict_debate/App/core/values/app_assets.dart';
 import '../../../../../core/values/app_color.dart';
 import '../../../../../core/values/app_text.dart';
+import '../../../../../routes/app_routes.dart';
 import '../controller/MyProfileController.dart';
 
 class MyProfileView extends GetView<MyProfileController> {
@@ -54,24 +55,38 @@ class MyProfileView extends GetView<MyProfileController> {
   Widget _buildAppBar() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => Get.back(),
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                shape: BoxShape.circle,
+      child: SizedBox(
+        height: 48,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Center(
+              child: Text(
+                "Profile",
+                style: AppText.h5.bold.copyWith(color: Colors.white),
               ),
-              child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
             ),
-          ),
-          const Spacer(),
-          Text("Profile", style: AppText.h5.bold.copyWith(color: Colors.white)),
-          const Spacer(),
-          const SizedBox(width: 40),
-        ],
+
+            Positioned(
+              right: 0,
+              child: GestureDetector(
+                onTap: () => Get.toNamed(AppRoutes.PROFILE),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.settings_outlined,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -282,7 +297,7 @@ class MyProfileView extends GetView<MyProfileController> {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(0xFFEEF2FF),
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,7 +354,7 @@ class MyProfileView extends GetView<MyProfileController> {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(20),
         gradient: const LinearGradient(
           colors: [Color(0xFF5A1435), Color(0xFF0F4D52)],
           begin: Alignment.topLeft,
@@ -404,7 +419,7 @@ class MyProfileView extends GetView<MyProfileController> {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(0xFFEEF2FF),
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

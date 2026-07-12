@@ -18,24 +18,58 @@ class ProfileView extends GetView<ProfileController> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text("Profile", style: TextStyle(color: Colors.white)),
-        // 1. Language Changer instead of Back Button
-        leadingWidth: 110,
-        leading: Center(
-          child: GestureDetector(
+
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.white,
+              size: 18,
+            ),
+          ),
+        ),
+
+        title: Text(
+          "Settings",
+          style: AppText.h4.bold.copyWith(
+            color: Colors.white,
+          ),
+        ),
+
+        actions: [
+          GestureDetector(
             onTap: () => _showLanguageDialog(context),
             child: Container(
-              margin: const EdgeInsets.only(left: 12),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              margin: const EdgeInsets.only(right: 12),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 6,
+              ),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.blueAccent.withOpacity(0.5)),
-                borderRadius: BorderRadius.circular(4),
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.2),
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.translate, size: 14, color: Colors.white70),
+                  const Icon(
+                    Icons.translate,
+                    size: 14,
+                    color: Colors.white70,
+                  ),
+
                   const SizedBox(width: 4),
+
                   Text(
                     "English",
                     style: AppText.label().copyWith(
@@ -43,8 +77,9 @@ class ProfileView extends GetView<ProfileController> {
                       fontSize: 12,
                     ),
                   ),
+
                   const Icon(
-                    Icons.arrow_right,
+                    Icons.keyboard_arrow_down,
                     size: 18,
                     color: Colors.white70,
                   ),
@@ -52,7 +87,9 @@ class ProfileView extends GetView<ProfileController> {
               ),
             ),
           ),
-        ),
+
+          const SizedBox(width: 8),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -135,7 +172,7 @@ class ProfileView extends GetView<ProfileController> {
               Icons.local_fire_department_rounded,
               "Arena",
               hasArrow: true,
-              onTap: () {},
+              onTap: () => Get.toNamed(AppRoutes.AREANA),
             ),
           ],
         ),
@@ -218,7 +255,7 @@ class ProfileView extends GetView<ProfileController> {
 
   Widget _buildMainProfileCard() {
     return GestureDetector(
-      onTap: () => Get.toNamed(AppRoutes.MY_PROFILE),
+      // onTap: () => Get.toNamed(AppRoutes.MY_PROFILE),
       behavior: HitTestBehavior.opaque,
       child: Container(
         padding: const EdgeInsets.all(24),
@@ -262,11 +299,6 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 14,
-                      color: Colors.white70,
-                    ),
                   ],
                 ),
               ],

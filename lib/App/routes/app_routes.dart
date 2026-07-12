@@ -17,9 +17,19 @@ abstract class AppRoutes {
 
   static const DEBATES = '/debates';
 
+  static const PRIVATE_DEBATE = '/private-debate';
+
+  static const COUNTRY_FILTER = '/country-filter';
+
+  static const GENDER_FILTER = '/gender-filter';
+
+  static const MATCH_SETTINGS = '/match-settings';
+
   static const AREANA = '/arena_debate';
 
   static const PROFILE = '/profile';
+
+  static const EDIT_PROFILE = '/edit-profile';
 
   static const GEMS_SHOP = '/gems-shop';
 

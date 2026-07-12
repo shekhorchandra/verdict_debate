@@ -103,22 +103,40 @@ class GenderSelectionView extends GetView<GenderSelectionController> {
       onTap: () {
         showCountryPicker(
           context: context,
-          showPhoneCode: false,
-          onSelect: (Country country) {
+          onSelect: (country) {
             controller.updateCountry(country.name, country.countryCode);
           },
           countryListTheme: CountryListThemeData(
-            backgroundColor: const Color(0xFF0D0C1E),
-            textStyle: const TextStyle(color: Colors.white),
-            searchTextStyle: const TextStyle(color: Colors.white),
-            borderRadius: BorderRadius.circular(20),
+            backgroundColor: const Color(0xFF1E293B), // Dialog background
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+            bottomSheetHeight: 600,
+
+            // Country name text
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+
+            // Search field
             inputDecoration: InputDecoration(
-              hintText: "Search country",
-              hintStyle: const TextStyle(color: Colors.white38),
-              prefixIcon: const Icon(Icons.search, color: Colors.white38),
+              hintText: "Search Country",
+              hintStyle: const TextStyle(color: Colors.white54),
+              prefixIcon: const Icon(Icons.search, color: Colors.white70),
               filled: true,
-              fillColor: const Color(0xFF252348),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              fillColor: const Color(0xFF334155),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+
+            // Optional: Search cursor color
+            searchTextStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
             ),
           ),
         );
@@ -134,7 +152,7 @@ class GenderSelectionView extends GetView<GenderSelectionController> {
           children: [
             Obx(() => Text(
                 _getFlag(controller.selectedCountryCode.value),
-                style: const TextStyle(fontSize: 20)
+                style: const TextStyle(color: Color(0xFF6366F1), fontSize: 20)
             )),
             const SizedBox(width: 12),
             Obx(() => Text(

@@ -21,6 +21,14 @@ import '../modules/debate/explore_polls/voting/binding/VotingInsightsBinding.dar
 import '../modules/debate/explore_polls/voting/views/VotingInsightsView.dart';
 import '../modules/debate/poll/binding/CreatePollBinding.dart';
 import '../modules/debate/poll/views/CreatePollView.dart';
+import '../modules/debate/private_debate/country_filter/binding/CountryFilterBinding.dart';
+import '../modules/debate/private_debate/country_filter/views/CountryFilterView.dart';
+import '../modules/debate/private_debate/gender_filter/binding/GenderFilterBinding.dart';
+import '../modules/debate/private_debate/gender_filter/views/GenderFilterView.dart';
+import '../modules/debate/private_debate/match/binding/MatchSettingsBinding.dart';
+import '../modules/debate/private_debate/match/views/MatchSettingsView.dart';
+import '../modules/debate/private_debate/pvt_debate/binding/PrivateDebateBinding.dart';
+import '../modules/debate/private_debate/pvt_debate/views/PrivateDebateView.dart';
 import '../modules/debate/profile/about_us/views/About_View.dart';
 import '../modules/debate/profile/account_setting/change_password/bindings/ChangePasswordBinding.dart';
 import '../modules/debate/profile/account_setting/change_password/views/ChangePasswordView.dart';
@@ -36,6 +44,8 @@ import '../modules/debate/profile/chat/chat_conversation/binding/ChatBinding.dar
 import '../modules/debate/profile/chat/chat_conversation/views/ChatView.dart';
 import '../modules/debate/profile/chat/message/binding/MessagesBinding.dart';
 import '../modules/debate/profile/chat/message/views/MessagesView.dart';
+import '../modules/debate/profile/edit_profile/binding/EditProfileBinding.dart';
+import '../modules/debate/profile/edit_profile/views/EditProfileView.dart';
 import '../modules/debate/profile/gems/bindings/GemsShopBinding.dart';
 import '../modules/debate/profile/gems/views/GemsShopView.dart';
 import '../modules/debate/profile/gift/bindings/GiftsBinding.dart';
@@ -121,6 +131,40 @@ class AppPages {
       binding: DebatesBinding(),
     ),
 
+    /// private debate
+    GetPage(
+      name: AppRoutes.PRIVATE_DEBATE,
+      page: () => const PrivateDebateView(),
+      binding: PrivateDebateBinding(),
+      transition: Transition.fadeIn, // Matches the smooth transition of the app
+    ),
+
+    /// country filter
+    GetPage(
+      name: AppRoutes.COUNTRY_FILTER,
+      page: () => const CountryFilterView(),
+      binding: CountryFilterBinding(),
+      // Bottom-to-top transition makes it feel like a persistent bottom sheet
+      transition: Transition.downToUp,
+    ),
+
+    /// gender filter
+    GetPage(
+      name: AppRoutes.GENDER_FILTER,
+      page: () => const GenderFilterView(),
+      binding: GenderFilterBinding(),
+      // This transition makes the page slide up over the live screen
+      transition: Transition.downToUp,
+    ),
+
+    /// matches
+    GetPage(
+      name: AppRoutes.MATCH_SETTINGS,
+      page: () => const MatchSettingsView(),
+      binding: MatchSettingsBinding(),
+      transition: Transition.rightToLeft, // Standard forward transition
+    ),
+
     /// Arena Screen
     GetPage(
       name: AppRoutes.AREANA,
@@ -133,6 +177,13 @@ class AppPages {
       name: AppRoutes.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+
+    /// edit profile
+    GetPage(
+      name: AppRoutes.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: EditProfileBinding(),
     ),
 
     /// create poll
