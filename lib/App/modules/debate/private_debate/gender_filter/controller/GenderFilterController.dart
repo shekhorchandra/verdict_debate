@@ -47,8 +47,8 @@ class GenderFilterController extends GetxController {
       }
     }
 
-    Get.offAllNamed(
-      AppRoutes.MATCH_SETTINGS, // Replace with your actual Matching screen route
+    Get.toNamed(
+      AppRoutes.MATCH_SETTINGS,
       arguments: {
         "id": categoryId,
         "title": categoryTitle,

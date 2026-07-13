@@ -12,7 +12,7 @@ class ChatController extends GetxController {
 
   final messages = <ChatMessage>[
     ChatMessage(
-      text: "That was a insane debate great points!",
+      text: "That was a insane debate_final_4 great points!",
       time: "12:45 AM",
       isMe: false,
       avatar: "https://i.pravatar.cc/150?u=1",

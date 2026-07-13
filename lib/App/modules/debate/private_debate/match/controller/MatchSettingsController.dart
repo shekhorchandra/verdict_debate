@@ -19,7 +19,6 @@ class MatchSettingsController extends GetxController {
   String? categoryTitle;
 
   @override
-  @override
   void onInit() {
     super.onInit();
 
@@ -33,6 +32,10 @@ class MatchSettingsController extends GetxController {
       selectedGender.value =
           Get.arguments['gender'] ?? "Gender";
     }
+  }
+
+  void onBack() {
+    Get.back();
   }
 
   void selectDuration(String dur) => selectedDuration.value = dur;
@@ -54,4 +57,6 @@ class MatchSettingsController extends GetxController {
     // Fixed the null issue by using 'categoryTitle' instead of arguments directly
     print("Searching for a match in $categoryTitle ($selectedCountry) for $selectedDuration...");
   }
+
+
 }

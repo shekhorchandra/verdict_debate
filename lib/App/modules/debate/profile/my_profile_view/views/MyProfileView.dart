@@ -100,10 +100,7 @@ class MyProfileView extends GetView<MyProfileController> {
         gradient: const LinearGradient(
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
-          colors: [
-            Color(0xFF242260),
-            Color(0xFF44418B),
-          ],
+          colors: [Color(0xFF242260), Color(0xFF44418B)],
         ),
         borderRadius: BorderRadius.circular(32),
       ),
@@ -116,10 +113,7 @@ class MyProfileView extends GetView<MyProfileController> {
                 padding: const EdgeInsets.all(3),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: const Color(0xFF818CF8),
-                    width: 2,
-                  ),
+                  border: Border.all(color: const Color(0xFF818CF8), width: 2),
                 ),
                 child: const CircleAvatar(
                   radius: 50,
@@ -145,15 +139,15 @@ class MyProfileView extends GetView<MyProfileController> {
                     GestureDetector(
                       onTap: controller.editProfile,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xFF6366F1),
-                              Color(0xFF3730A3),
-                            ],
+                            colors: [Color(0xFF6366F1), Color(0xFF3730A3)],
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -195,11 +189,7 @@ class MyProfileView extends GetView<MyProfileController> {
               ),
             ],
           ),
-          const Divider(
-            height: 25,
-            thickness: 1.3,
-            color: Colors.white10,
-          ),
+          const Divider(height: 25, thickness: 1.3, color: Colors.white10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -227,7 +217,12 @@ class MyProfileView extends GetView<MyProfileController> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: const Color(0xFF1E1B4B).withOpacity(0.8), width: 1)),
+        border: Border(
+          bottom: BorderSide(
+            color: const Color(0xFF1E1B4B).withOpacity(0.8),
+            width: 1,
+          ),
+        ),
       ),
       child: Obx(
         () => Row(
@@ -267,7 +262,9 @@ class MyProfileView extends GetView<MyProfileController> {
 
                 Text(
                   title,
-                  style: AppText.h5().copyWith(color: isActive ? Colors.white : Colors.white38),
+                  style: AppText.h5().copyWith(
+                    color: isActive ? Colors.white : Colors.white38,
+                  ),
                 ),
               ],
             ),
@@ -276,9 +273,7 @@ class MyProfileView extends GetView<MyProfileController> {
 
             Container(
               height: 2,
-              color: isActive
-                  ? const Color(0xFF6366F1)
-                  : Colors.white10,
+              color: isActive ? const Color(0xFF6366F1) : Colors.white10,
             ),
           ],
         ),
@@ -304,11 +299,23 @@ class MyProfileView extends GetView<MyProfileController> {
         children: [
           Row(
             children: [
-              _pollStat(Icons.poll_outlined, "3,420 votes", const Color(0xFFFF006E)),
+              _pollStat(
+                Icons.poll_outlined,
+                "3,420 votes",
+                const Color(0xFFFF006E),
+              ),
               const SizedBox(width: 15),
-              _pollStat(Icons.favorite_outline, "1655", const Color(0xFFFF006E)),
+              _pollStat(
+                Icons.favorite_outline,
+                "1655",
+                const Color(0xFFFF006E),
+              ),
               const SizedBox(width: 15),
-              _pollStat(Icons.chat_bubble_outline, "32", const Color(0xFFFF006E)),
+              _pollStat(
+                Icons.chat_bubble_outline,
+                "32",
+                const Color(0xFFFF006E),
+              ),
             ],
           ),
           const SizedBox(height: 15),
@@ -375,8 +382,19 @@ class MyProfileView extends GetView<MyProfileController> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _matchAvatar("jamie_vardy", isWinner, const Color(0xFFFF006E)),
-              const Icon(Icons.title, color: Colors.white24, size: 40),
-              _matchAvatar("emily_watson11", !isWinner, const Color(0xFF00B4D8)),
+              SvgPicture.asset(
+                AppAssets.war,
+                width: 45,
+                colorFilter: ColorFilter.mode(
+                  Colors.white.withOpacity(0.5),
+                  BlendMode.srcIn,
+                ),
+              ),
+              _matchAvatar(
+                "emily_watson11",
+                !isWinner,
+                const Color(0xFF00B4D8),
+              ),
             ],
           ),
           const SizedBox(height: 15),
@@ -397,7 +415,11 @@ class MyProfileView extends GetView<MyProfileController> {
           ),
           const Text(
             "Climate change requires immediate action",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
           const SizedBox(height: 15),
           _matchPollBar(39, 61),
@@ -439,15 +461,24 @@ class MyProfileView extends GetView<MyProfileController> {
                       children: [
                         Text("Tonoy_Saha", style: AppText.body1.bold),
                         const SizedBox(width: 8),
-                        const Icon(Icons.repeat, color: Color(0xFF6366F1), size: 16),
+                        const Icon(
+                          Icons.repeat,
+                          color: Color(0xFF6366F1),
+                          size: 16,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           "reposted",
-                          style: AppText.label().copyWith(color: const Color(0xFF6366F1)),
+                          style: AppText.label().copyWith(
+                            color: const Color(0xFF6366F1),
+                          ),
                         ),
                       ],
                     ),
-                    Text("1 day ago", style: AppText.label().copyWith(color: Colors.grey)),
+                    Text(
+                      "1 day ago",
+                      style: AppText.label().copyWith(color: Colors.grey),
+                    ),
                   ],
                 ),
               ),
@@ -470,7 +501,11 @@ class MyProfileView extends GetView<MyProfileController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _miniProfileHeader("@zara_debates", "Ends 1 week ago", isDark: false),
+                _miniProfileHeader(
+                  "@zara_debates",
+                  "Ends 1 week ago",
+                  isDark: false,
+                ),
                 const SizedBox(height: 10),
                 Text(
                   "Should remote work be the default for tech companies?",
@@ -508,7 +543,10 @@ class MyProfileView extends GetView<MyProfileController> {
           Text(title, style: AppText.h4.bold.copyWith(color: Colors.white)),
           const Row(
             children: [
-              Text("All", style: TextStyle(color: Colors.white54, fontSize: 12)),
+              Text(
+                "All",
+                style: TextStyle(color: Colors.white54, fontSize: 12),
+              ),
               Icon(Icons.arrow_right, color: Colors.white54),
             ],
           ),
@@ -567,7 +605,9 @@ class MyProfileView extends GetView<MyProfileController> {
               height: 6,
               decoration: const BoxDecoration(
                 color: Color(0xFF00B4D8),
-                borderRadius: BorderRadius.horizontal(right: Radius.circular(5)),
+                borderRadius: BorderRadius.horizontal(
+                  right: Radius.circular(5),
+                ),
               ),
             ),
           ),
@@ -576,24 +616,36 @@ class MyProfileView extends GetView<MyProfileController> {
     ],
   );
 
-  Widget _miniProfileHeader(String user, String time, {bool isDark = true}) => Row(
-    children: [
-      const CircleAvatar(radius: 12, backgroundImage: NetworkImage('https://i.pravatar.cc/100')),
-      const SizedBox(width: 8),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              user,
-              style: AppText.label.bold.copyWith(color: isDark ? Colors.white : Colors.black),
+  Widget _miniProfileHeader(String user, String time, {bool isDark = true}) =>
+      Row(
+        children: [
+          const CircleAvatar(
+            radius: 12,
+            backgroundImage: NetworkImage('https://i.pravatar.cc/100'),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user,
+                  style: AppText.label.bold.copyWith(
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
+                Text(
+                  time,
+                  style: AppText.label().copyWith(
+                    color: Colors.grey,
+                    fontSize: 8,
+                  ),
+                ),
+              ],
             ),
-            Text(time, style: AppText.label().copyWith(color: Colors.grey, fontSize: 8)),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   Widget _fullWidthButton(String label) => Container(
     width: double.infinity,
@@ -603,10 +655,7 @@ class MyProfileView extends GetView<MyProfileController> {
       gradient: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [
-          Color(0xFF6366F1),
-          Color(0xFF3730A3),
-        ],
+        colors: [Color(0xFF6366F1), Color(0xFF3730A3)],
       ),
     ),
     child: Center(
@@ -633,7 +682,11 @@ class MyProfileView extends GetView<MyProfileController> {
       const Spacer(),
       const Text(
         "View Comments",
-        style: TextStyle(color: Color(0xFF6366F1), fontSize: 12, fontWeight: FontWeight.bold),
+        style: TextStyle(
+          color: Color(0xFF6366F1),
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       const Icon(Icons.arrow_forward_ios, size: 10, color: Color(0xFF6366F1)),
     ],
@@ -657,14 +710,22 @@ class MyProfileView extends GetView<MyProfileController> {
               padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: isWinner ? Colors.amber : ring, width: 2),
+                border: Border.all(
+                  color: isWinner ? Colors.amber : ring,
+                  width: 2,
+                ),
               ),
               child: const CircleAvatar(
                 radius: 30,
                 backgroundImage: NetworkImage('https://i.pravatar.cc/150'),
               ),
             ),
-            if (isWinner) const Icon(Icons.workspace_premium, color: Colors.amber, size: 20),
+            if (isWinner)
+              const Icon(
+                Icons.workspace_premium,
+                color: Colors.amber,
+                size: 20,
+              ),
           ],
         ),
         const SizedBox(height: 5),
@@ -681,10 +742,7 @@ class MyProfileView extends GetView<MyProfileController> {
       gradient: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [
-          Color(0xFF6366F1),
-          Color(0xFF3730A3),
-        ],
+        colors: [Color(0xFF6366F1), Color(0xFF3730A3)],
       ),
     ),
     child: Row(
@@ -692,20 +750,14 @@ class MyProfileView extends GetView<MyProfileController> {
       children: [
         const Text(
           "Watch The Debate",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         const SizedBox(width: 8),
         SvgPicture.asset(
           AppAssets.debate,
           height: 16,
           width: 16,
-          colorFilter: const ColorFilter.mode(
-            Colors.white,
-            BlendMode.srcIn,
-          ),
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         ),
       ],
     ),

@@ -103,7 +103,7 @@ class PaymentMethodsView extends StatelessWidget {
                   const SizedBox(height: 6),
 
                   Text(
-                    'Your earnings from live debate gifts can be withdrawn once you add your bank account details.',
+                    'Your earnings from live debate_final_4 gifts can be withdrawn once you add your bank account details.',
                     style: TextStyle(color: Colors.white70),
                   ),
 

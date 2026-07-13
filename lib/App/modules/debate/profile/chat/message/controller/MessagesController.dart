@@ -7,11 +7,11 @@ class MessagesController extends GetxController {
 
   // Mock Data for Inbox
   final inboxMessages = <UserMessageModel>[
-    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=1"),
-    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=2", unreadCount: 3),
-    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=3", unreadCount: 3),
-    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=4", unreadCount: 3),
-    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=5"),
+    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate_final_4 great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=1"),
+    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate_final_4 great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=2", unreadCount: 3),
+    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate_final_4 great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=3", unreadCount: 3),
+    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate_final_4 great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=4", unreadCount: 3),
+    UserMessageModel(name: "Johan Liebert", message: "That was a insane debate_final_4 great points", time: "12:45 AM", avatar: "https://i.pravatar.cc/150?u=5"),
   ].obs;
 
   // Mock Data for Requests

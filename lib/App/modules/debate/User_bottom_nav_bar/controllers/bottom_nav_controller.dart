@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../arena_debate/views/ArenaView.dart';
-import '../../debates_live/live/views/DebatesView.dart';
+import '../../debates_live/challenge_1/views/challenge_view.dart';
 import '../../explore_polls/explore/views/ExploreView.dart';
 import '../../private_debate/pvt_debate/views/PrivateDebateView.dart';
 import '../../profile/my_profile_view/views/MyProfileView.dart';
-import '../../profile/user_profile/views/ProfileView.dart';
+
 
 class UserNavigationBarController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
@@ -22,7 +21,7 @@ class UserNavigationBarController extends GetxController {
 
   final screens = [
     const ExploreView(),
-    const DebatesView(),
+    const ChallengeView(),
     const PrivateDebateView(),
     const MyProfileView(),
   ];

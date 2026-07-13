@@ -11,8 +11,15 @@ import '../modules/debate/User_bottom_nav_bar/bindings/user_navigation_bar_bindi
 import '../modules/debate/User_bottom_nav_bar/views/bottom_nav_view.dart';
 import '../modules/debate/arena_debate/bindings/ArenaBinding.dart';
 import '../modules/debate/arena_debate/views/ArenaView.dart';
-import '../modules/debate/debates_live/live/bindings/DebatesBinding.dart';
-import '../modules/debate/debates_live/live/views/DebatesView.dart';
+import '../modules/debate/debates_live/challenge_1/binding/challenge_binding.dart';
+import '../modules/debate/debates_live/challenge_1/views/challenge_view.dart';
+
+import '../modules/debate/debates_live/debate_final_4/binding/DebateBinding.dart';
+import '../modules/debate/debates_live/debate_final_4/views/DebateView.dart';
+import '../modules/debate/debates_live/live_challenge_2/binding/LiveChallengeBinding.dart';
+import '../modules/debate/debates_live/live_challenge_2/views/LiveChallengeView.dart';
+import '../modules/debate/debates_live/live_debtae_3/binding/live_debate_binding.dart';
+import '../modules/debate/debates_live/live_debtae_3/views/live_debate_view.dart';
 import '../modules/debate/explore_polls/explore/binding/DebateBinding.dart';
 import '../modules/debate/explore_polls/explore/views/ExploreView.dart';
 import '../modules/debate/explore_polls/explore_details/binding/DebateDetailBinding.dart';
@@ -108,7 +115,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.EXPLORE,
       page: () => const ExploreView(),
-      binding: DebateBinding(),
+      binding: ExploreDebateBinding(),
     ),
 
     GetPage(
@@ -124,11 +131,32 @@ class AppPages {
       binding: VotingInsightsBinding(),
     ),
 
-    /// debates screen
+    /// LIVE screen
     GetPage(
-      name: AppRoutes.DEBATES,
-      page: () => const DebatesView(),
-      binding: DebatesBinding(),
+      name: AppRoutes.CHALLENGE,
+      page: () => const ChallengeView(),
+      binding: ChallengeBinding(),
+    ),
+
+    ///LIve challenge
+    GetPage(
+      name: AppRoutes.LIVECHALLENGE,
+      page: () => const LiveChallengeView(),
+      binding: LiveChallengeBinding(),
+    ),
+
+    ///LIve debate
+    GetPage(
+      name: AppRoutes.LIVEDEBATE,
+      page: () => const LiveDebateView(),
+      binding: LiveDebateBinding(),
+    ),
+
+    ///LIve final debate
+    GetPage(
+      name: AppRoutes.FINALDEBATES,
+      page: () => const DebateView(),
+      binding: DebateBinding(),
     ),
 
     /// private debate

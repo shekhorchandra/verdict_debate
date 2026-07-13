@@ -250,7 +250,7 @@
 //         maxLines: 4,
 //         style: TextStyle(color: Colors.black),
 //         decoration: const InputDecoration(
-//           hintText: "What will you debate about?",
+//           hintText: "What will you debate_final_4 about?",
 //           hintStyle: TextStyle(
 //             color: Colors.grey,
 //           ),
@@ -672,10 +672,7 @@
 //   );
 // }
 
-
 ////////////////// For phase 1 /////////////////////
-
-
 
 import 'dart:io';
 
@@ -694,24 +691,63 @@ class CreatePollView extends GetView<CreatePollController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: CommonAppBar(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        showBack: true,
-        titleWidget: Text(
-          "Create Poll",
-          style: AppText.h4.semiBold.copyWith(color: Colors.white),
+
+        appBar: CommonAppBar(
+          backgroundColor: Colors.transparent,
+          showBack: true,
+          titleWidget: Text(
+            "Create Poll",
+            style: AppText.h4.semiBold.copyWith(color: Colors.white),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+
+        body: Column(
           children: [
+
             const SizedBox(height: 20),
 
-            _buildPollUI(),
+            _buildTopTabs(),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
+
+            Expanded(
+              child: Obx(() {
+
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+
+                      // COMMON POLL SECTION
+                      _buildPollUI(),
+
+
+                      // ONLY GO LIVE EXTRA SECTION
+                      if(controller.selectedTab.value == 1)...[
+
+                        const SizedBox(height: 30),
+
+                        _buildLiveDuration(),
+
+                        const SizedBox(height: 30),
+
+                        _buildFindOpponentButton(),
+
+                      ],
+
+
+                      const SizedBox(height:40),
+
+                    ],
+                  ),
+                );
+
+              }),
+            )
+
           ],
         ),
       ),
@@ -741,7 +777,20 @@ class CreatePollView extends GetView<CreatePollController> {
         _buildBoostSection(),
         const SizedBox(height: 30),
 
-        _mainActionBtn("Post Poll", AppAssets.poll),
+        Obx(() {
+
+          if(controller.selectedTab.value == 0){
+
+            return _mainActionBtn(
+              "Post Poll",
+              AppAssets.poll,
+            );
+
+          }
+
+          return const SizedBox();
+
+        }),
       ],
     );
   }
@@ -772,25 +821,18 @@ class CreatePollView extends GetView<CreatePollController> {
                     /// Image Preview
                     if (mediaType == "image")
                       Positioned.fill(
-                        child: Image.file(
-                          mediaFile,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.file(mediaFile, fit: BoxFit.cover),
                       ),
 
                     /// Video Preview
                     if (mediaType == "video")
                       Positioned.fill(
-                        child: LocalVideoPreview(
-                          videoFile: mediaFile,
-                        ),
+                        child: LocalVideoPreview(videoFile: mediaFile),
                       ),
 
                     /// Dark overlay for readable text
                     Positioned.fill(
-                      child: Container(
-                        color: Colors.black.withOpacity(0.25),
-                      ),
+                      child: Container(color: Colors.black.withOpacity(0.25)),
                     ),
 
                     /// Caption / Poll Text
@@ -864,7 +906,7 @@ class CreatePollView extends GetView<CreatePollController> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Obx(
-                              () => Text(
+                          () => Text(
                             controller.pollText.value,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
@@ -884,17 +926,19 @@ class CreatePollView extends GetView<CreatePollController> {
                       left: 0,
                       right: 0,
                       child: Obx(
-                            () => Row(
+                        () => Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                             controller.backgroundColors.length,
-                                (i) {
+                            (i) {
                               final isActive =
                                   controller.currentPollIndicator.value == i;
 
                               return AnimatedContainer(
                                 duration: const Duration(milliseconds: 250),
-                                margin: const EdgeInsets.symmetric(horizontal: 4),
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                ),
                                 width: isActive ? 18 : 8,
                                 height: 8,
                                 decoration: BoxDecoration(
@@ -963,29 +1007,27 @@ class CreatePollView extends GetView<CreatePollController> {
             children: [
               icon is String
                   ? Text(
-                icon,
-                style: TextStyle(
-                  color: isSelected
-                      ? const Color(0xFF6366F1)
-                      : Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
+                      icon,
+                      style: TextStyle(
+                        color: isSelected
+                            ? const Color(0xFF6366F1)
+                            : Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
                   : Icon(
-                icon,
-                color: isSelected
-                    ? const Color(0xFF6366F1)
-                    : Colors.white,
-                size: 24,
-              ),
+                      icon,
+                      color: isSelected
+                          ? const Color(0xFF6366F1)
+                          : Colors.white,
+                      size: 24,
+                    ),
               const SizedBox(height: 8),
               Text(
                 label,
                 style: TextStyle(
-                  color: isSelected
-                      ? const Color(0xFF6366F1)
-                      : Colors.white38,
+                  color: isSelected ? const Color(0xFF6366F1) : Colors.white38,
                   fontSize: 12,
                 ),
               ),
@@ -1042,43 +1084,105 @@ class CreatePollView extends GetView<CreatePollController> {
 
   Widget _mainActionBtn(String text, String iconPath) {
     return GestureDetector(
-      onTap: controller.handleAction,
+      onTap: () {
+
+        if(controller.selectedTab.value == 0){
+
+          // Poll action
+          controller.handleAction();
+
+        }else{
+
+          // Go Live action
+          controller.findOpponent();
+
+        }
+
+      },
+
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
+
         child: Container(
+
           width: double.infinity,
           height: 56,
+
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+
+            borderRadius:
+            BorderRadius.circular(16),
+
             gradient: const LinearGradient(
-              colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
+
+              colors:[
+                Color(0xFF6366F1),
+                Color(0xFF4F46E5),
+              ],
+
             ),
+
           ),
+
+
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+
+            mainAxisAlignment:
+            MainAxisAlignment.center,
+
+
+            children:[
+
+
               Text(
+
                 text,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+
+                style:const TextStyle(
+
+                  color:Colors.white,
+
+                  fontSize:16,
+
+                  fontWeight:
+                  FontWeight.bold,
+
                 ),
+
               ),
-              const SizedBox(width: 10),
+
+
+              const SizedBox(width:10),
+
+
               SvgPicture.asset(
+
                 iconPath,
-                width: 20,
-                height: 20,
-                colorFilter: const ColorFilter.mode(
+
+                width:20,
+
+                height:20,
+
+                colorFilter:
+                const ColorFilter.mode(
+
                   Colors.white,
+
                   BlendMode.srcIn,
+
                 ),
+
               ),
+
+
             ],
+
           ),
+
         ),
+
       ),
+
     );
   }
 
@@ -1117,10 +1221,7 @@ class CreatePollView extends GetView<CreatePollController> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.white38,
-          fontSize: 13,
-        ),
+        style: const TextStyle(color: Colors.white38, fontSize: 13),
       ),
     );
   }
@@ -1254,9 +1355,7 @@ class CreatePollView extends GetView<CreatePollController> {
         ),
         decoration: const BoxDecoration(
           color: Color(0xFF171530),
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(24),
-          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -1278,14 +1377,9 @@ class CreatePollView extends GetView<CreatePollController> {
                 controller: controller.pollTextController,
                 maxLines: 4,
                 autofocus: true,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
                 onTap: () {
-                  controller.updatePollText(
-                    controller.pollTextController.text,
-                  );
+                  controller.updatePollText(controller.pollTextController.text);
                   Get.back();
                 },
                 decoration: InputDecoration(
@@ -1304,9 +1398,7 @@ class CreatePollView extends GetView<CreatePollController> {
 
               GestureDetector(
                 onTap: () {
-                  controller.updatePollText(
-                    controller.pollTextController.text,
-                  );
+                  controller.updatePollText(controller.pollTextController.text);
                   Get.back();
                 },
                 child: Container(
@@ -1315,10 +1407,7 @@ class CreatePollView extends GetView<CreatePollController> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     gradient: const LinearGradient(
-                      colors: [
-                        Color(0xFF6366F1),
-                        Color(0xFF4F46E5),
-                      ],
+                      colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
                     ),
                   ),
                   child: const Center(
@@ -1347,9 +1436,7 @@ class CreatePollView extends GetView<CreatePollController> {
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
           color: Color(0xFF171530),
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(24),
-          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1399,7 +1486,6 @@ class CreatePollView extends GetView<CreatePollController> {
     );
   }
 
-
   Widget _mediaOptionCard({
     required IconData icon,
     required String title,
@@ -1416,11 +1502,7 @@ class CreatePollView extends GetView<CreatePollController> {
         ),
         child: Column(
           children: [
-            Icon(
-              icon,
-              color: Colors.white,
-              size: 30,
-            ),
+            Icon(icon, color: Colors.white, size: 30),
             const SizedBox(height: 10),
             Text(
               title,
@@ -1434,16 +1516,566 @@ class CreatePollView extends GetView<CreatePollController> {
       ),
     );
   }
-}
 
+  Widget _buildGoLiveTab() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Existing poll preview
+          _buildPollUI(),
+
+          const SizedBox(height: 20),
+
+          // Duration section
+          _buildDurationSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPollTab() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+
+          _headerLabel("Poll Question", hasInfo: true),
+
+          _subLabel("Ask a clear, engaging question."),
+
+          const SizedBox(height: 15),
+
+          _buildPollPreview(),
+
+          const SizedBox(height: 30),
+
+          _buildAddonRow(),
+
+          const SizedBox(height: 30),
+
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDurationSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Icon(Icons.access_time, color: Colors.white54),
+
+              SizedBox(width: 8),
+
+              Text(
+                "Live Duration",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 15),
+
+          _buildDurationGrid(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDurationGrid(){
+
+    return GridView.builder(
+
+      shrinkWrap:true,
+      physics:const NeverScrollableScrollPhysics(),
+
+      itemCount:controller.liveDurations.length,
+
+      gridDelegate:
+      const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount:3,
+        crossAxisSpacing:12,
+        mainAxisSpacing:12,
+        childAspectRatio:2.5,
+      ),
+
+
+      itemBuilder:(context,index){
+
+        final duration =
+        controller.liveDurations[index];
+
+
+        return Obx(()=>GestureDetector(
+
+          onTap:(){
+            controller.selectDuration(duration);
+          },
+
+
+          child:Container(
+
+            alignment:Alignment.center,
+
+            decoration:BoxDecoration(
+
+              color:
+              controller.selectedDuration.value==duration
+                  ?
+              const Color(0xff6366F1)
+                  :
+              const Color(0xff252348),
+
+
+              borderRadius:
+              BorderRadius.circular(12),
+
+              border:Border.all(
+                color:Colors.white10,
+              ),
+
+            ),
+
+
+            child:Text(
+
+              duration,
+
+              style:const TextStyle(
+                color:Colors.white,
+                fontWeight:FontWeight.bold,
+              ),
+
+            ),
+
+          ),
+
+        ));
+
+
+      },
+
+    );
+
+  }
+
+  // Widget _buildGoLiveUI(){
+  //
+  //   return SingleChildScrollView(
+  //
+  //     padding: const EdgeInsets.all(20),
+  //
+  //     child: Column(
+  //
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //       children: [
+  //
+  //
+  //         const Text(
+  //           "Live Duration",
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontSize:18,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //
+  //
+  //         const SizedBox(height:20),
+  //
+  //
+  //         _buildDurationGrid(),
+  //
+  //
+  //         const SizedBox(height:40),
+  //
+  //
+  //         GestureDetector(
+  //
+  //           onTap: controller.findOpponent,
+  //
+  //           child: Container(
+  //
+  //             height:55,
+  //
+  //             width:double.infinity,
+  //
+  //             decoration: BoxDecoration(
+  //
+  //               gradient: const LinearGradient(
+  //                 colors:[
+  //                   Color(0xff6366F1),
+  //                   Color(0xff4F46E5),
+  //                 ],
+  //               ),
+  //
+  //               borderRadius:
+  //               BorderRadius.circular(16),
+  //
+  //             ),
+  //
+  //             child: const Center(
+  //
+  //               child: Text(
+  //                 "Find Opponent",
+  //                 style: TextStyle(
+  //                   color:Colors.white,
+  //                   fontSize:16,
+  //                   fontWeight:FontWeight.bold,
+  //                 ),
+  //               ),
+  //
+  //             ),
+  //
+  //           ),
+  //
+  //         ),
+  //
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  Widget _buildTopTabs(){
+
+    return Obx(
+          ()=>Container(
+        margin: const EdgeInsets.symmetric(horizontal:16),
+        height:50,
+
+        decoration: BoxDecoration(
+          color: const Color(0xff1E1B4B),
+          borderRadius: BorderRadius.circular(14),
+        ),
+
+        child: Row(
+          children: [
+
+            Expanded(
+              child: GestureDetector(
+                onTap: (){
+                  controller.changeTab(0);
+                },
+
+                child: Container(
+
+                  alignment: Alignment.center,
+
+                  decoration: BoxDecoration(
+
+                    color:
+                    controller.selectedTab.value == 0
+                        ? const Color(0xff6366F1)
+                        : Colors.transparent,
+
+                    borderRadius:
+                    BorderRadius.circular(14),
+
+                  ),
+
+                  child: const Text(
+                    "Poll",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                ),
+              ),
+            ),
+
+
+
+            Expanded(
+              child: GestureDetector(
+
+                onTap: (){
+                  controller.changeTab(1);
+                },
+
+                child: Container(
+
+                  alignment: Alignment.center,
+
+                  decoration: BoxDecoration(
+
+                    color:
+                    controller.selectedTab.value == 1
+                        ? const Color(0xff6366F1)
+                        : Colors.transparent,
+
+                    borderRadius:
+                    BorderRadius.circular(14),
+
+                  ),
+
+                  child: const Text(
+                    "Go Live",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLiveDuration() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          const Text(
+            "Live Duration",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 15),
+
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+
+            itemCount: controller.liveDurations.length,
+
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 2.5,
+            ),
+
+            itemBuilder: (context, index) {
+
+              final duration = controller.liveDurations[index];
+
+              final isPro =
+              controller.proDurations.contains(duration);
+
+
+              return Obx(() {
+
+                final selected =
+                    controller.selectedDuration.value == duration;
+
+
+                return GestureDetector(
+
+                  onTap: () {
+                    controller.selectDuration(duration);
+                  },
+
+
+                  child: Stack(
+
+                    clipBehavior: Clip.none,
+
+                    children: [
+
+                      Container(
+
+                        alignment: Alignment.center,
+
+                        decoration: BoxDecoration(
+
+                          color: selected
+                              ? const Color(0xff6366F1)
+                              : const Color(0xff252348),
+
+                          borderRadius:
+                          BorderRadius.circular(12),
+
+                          border: Border.all(
+                            color: selected
+                                ? const Color(0xff818CF8)
+                                : Colors.white10,
+                          ),
+
+                        ),
+
+
+                        child: Text(
+
+                          duration,
+
+                          style: TextStyle(
+
+                            color: selected
+                                ? Colors.white
+                                : Colors.white60,
+
+                            fontWeight:
+                            FontWeight.w600,
+
+                          ),
+
+                        ),
+
+                      ),
+
+
+                      // PRO BADGE
+                      if(isPro)
+
+                        Positioned(
+
+                          top: -6,
+                          right: -6,
+
+                          child: Container(
+
+                            padding:
+                            const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+
+
+                            decoration: BoxDecoration(
+
+                              color:
+                              const Color(0xffffc107),
+
+                              borderRadius:
+                              BorderRadius.circular(20),
+
+                            ),
+
+
+                            child: const Text(
+
+                              "PRO",
+
+                              style: TextStyle(
+
+                                color: Colors.black,
+
+                                fontSize: 8,
+
+                                fontWeight:
+                                FontWeight.bold,
+
+                              ),
+
+                            ),
+
+                          ),
+
+                        ),
+
+                    ],
+
+                  ),
+
+                );
+
+              });
+
+            },
+
+          ),
+
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFindOpponentButton(){
+
+    return Padding(
+
+      padding:
+      const EdgeInsets.symmetric(horizontal:16),
+
+      child:GestureDetector(
+
+        onTap:controller.findOpponent,
+
+
+        child:Container(
+
+          height:56,
+
+          width:double.infinity,
+
+
+          decoration:BoxDecoration(
+
+            gradient:const LinearGradient(
+
+              colors:[
+
+                Color(0xff6366F1),
+                Color(0xff4F46E5),
+
+              ],
+
+            ),
+
+
+            borderRadius:
+            BorderRadius.circular(16),
+
+          ),
+
+
+          child:const Center(
+
+            child:Text(
+
+              "Find Opponent",
+
+              style:TextStyle(
+
+                color:Colors.white,
+
+                fontSize:16,
+
+                fontWeight:
+                FontWeight.bold,
+
+              ),
+
+            ),
+
+          ),
+
+        ),
+
+      ),
+
+    );
+
+  }
+}
 
 class LocalVideoPreview extends StatefulWidget {
   final File videoFile;
 
-  const LocalVideoPreview({
-    super.key,
-    required this.videoFile,
-  });
+  const LocalVideoPreview({super.key, required this.videoFile});
 
   @override
   State<LocalVideoPreview> createState() => _LocalVideoPreviewState();

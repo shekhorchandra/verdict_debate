@@ -11,7 +11,7 @@
 //
 //   // --- Go Live Specific State ---
 //   var selectedPosition = "Support".obs; // Default position
-//   var selectedDuration = "15m".obs; // Default debate duration
+//   var selectedDuration = "15m".obs; // Default debate_final_4 duration
 //   var argumentText = "".obs; // To track character count if needed
 //
 //   final TextEditingController debateInputController = TextEditingController();
@@ -53,7 +53,7 @@
 //       // Logic for posting a poll
 //       Get.snackbar("Success", "Poll posted successfully!");
 //     } else {
-//       // Logic for starting a live debate
+//       // Logic for starting a live debate_final_4
 //       Get.snackbar("Debate", "Searching for opponent...");
 //     }
 //   }
@@ -69,7 +69,8 @@ import 'package:image_picker/image_picker.dart';
 class CreatePollController extends GetxController {
   /// 0 = Text, 1 = Media, 2 = Background
   var selectedAddon = 2.obs;
-
+  var selectedTab = 0.obs;
+  var selectedDuration = "10m".obs;
   var currentPollIndicator = 0.obs;
 
   var pollText = "write your\npoll question".obs;
@@ -82,6 +83,43 @@ class CreatePollController extends GetxController {
 
   /// image / video / empty
   var selectedMediaType = "".obs;
+
+  final List<String> liveDurations = [
+    "10m",
+    "15m",
+    "30m",
+    "45m",
+    "60m",
+  ];
+
+  final List<String> proDurations = [
+    "30m",
+    "45m",
+    "60m",
+    "75m"
+  ];
+
+  void changeTab(int index) {
+    selectedTab.value = index;
+  }
+
+  void selectDuration(String duration) {
+    selectedDuration.value = duration;
+  }
+
+  void findOpponent() {
+    debugPrint(
+      "Finding opponent for ${selectedDuration.value}",
+    );
+
+    Get.snackbar(
+      "Searching",
+      "Looking for an opponent...",
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
+
+
 
   final TextEditingController pollTextController = TextEditingController();
   final PageController backgroundPageController = PageController();

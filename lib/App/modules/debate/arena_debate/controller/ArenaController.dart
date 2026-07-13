@@ -61,7 +61,7 @@ class ArenaController extends GetxController {
       "time": "Ends 2 days ago",
       "userImg": "https://i.pravatar.cc/150?u=zara2",
       "question": "Will AI eventually replace software engineers?",
-      "description": "The rise of LLMs has sparked a global debate. Some see it as a tool, while others fear full automation.",
+      "description": "The rise of LLMs has sparked a global debate_final_4. Some see it as a tool, while others fear full automation.",
       "pollImg": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
       "votes": "12,100",
       "likes": "5.4k",

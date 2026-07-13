@@ -15,9 +15,15 @@ abstract class AppRoutes {
 
   static const VOTING_INSIGHTS = '/voting-insights';
 
-  static const DEBATES = '/debates';
+  static const CHALLENGE = '/challenge_1';
 
-  static const PRIVATE_DEBATE = '/private-debate';
+  static const LIVECHALLENGE = '/live-challenge_1';
+
+  static const LIVEDEBATE = '/live-debate_final_4';
+
+  static const FINALDEBATES = '/final-debates';
+
+  static const PRIVATE_DEBATE = '/private-debate_final_4';
 
   static const COUNTRY_FILTER = '/country-filter';
 

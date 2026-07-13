@@ -107,25 +107,79 @@ class MatchSettingsView extends GetView<MatchSettingsController> {
             ),
           ),
 
+          // Back Button
+          Positioned(
+            top: 45,
+            left: 16,
+            child: GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.25),
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
 
 
           // Gem Balance
           Positioned(
-            top: 50, right: 16,
+            top: 50,
+            right: 16,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(color: const Color(0xFF2E2C5C), borderRadius: BorderRadius.circular(12)),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2E2C5C),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Row(
                 children: [
-                  const Icon(Icons.diamond, color: Color(0xFF818CF8), size: 18),
+                  const Icon(
+                    Icons.diamond,
+                    color: Color(0xFF818CF8),
+                    size: 18,
+                  ),
+
                   const SizedBox(width: 6),
-                  Obx(() => Text("${controller.gemBalance.value}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+
+                  Obx(
+                        () => Text(
+                      "${controller.gemBalance.value}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
 
-          // Controls (Camera, Volume, Mic)
+
+          // Controls
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
