@@ -31,6 +31,8 @@ abstract class AppRoutes {
 
   static const MATCH_SETTINGS = '/match-settings';
 
+  static const LIVE_STREAM = '/live-stream';
+
   static const AREANA = '/arena_debate';
 
   static const PROFILE = '/profile';
@@ -64,6 +66,9 @@ abstract class AppRoutes {
 
   /// create poll
   static const CREATE_POLL = '/create-poll';
+  static const BOOST_POLL = '/boost-poll';
+  static const WAITING_ROOM = '/waiting-room';
+  static const LIVEOWN_DEBATE = '/liveown-debate';
 
   // payment method
   static const ADD_PAYMENT_METHOD = '/payment-method/add';

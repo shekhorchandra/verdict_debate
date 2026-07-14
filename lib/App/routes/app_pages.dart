@@ -26,12 +26,20 @@ import '../modules/debate/explore_polls/explore_details/binding/DebateDetailBind
 import '../modules/debate/explore_polls/explore_details/views/DebateDetailView.dart';
 import '../modules/debate/explore_polls/voting/binding/VotingInsightsBinding.dart';
 import '../modules/debate/explore_polls/voting/views/VotingInsightsView.dart';
-import '../modules/debate/poll/binding/CreatePollBinding.dart';
-import '../modules/debate/poll/views/CreatePollView.dart';
+import '../modules/debate/poll/boost/binding/boost_poll_binding.dart';
+import '../modules/debate/poll/boost/views/boost_poll_view.dart';
+import '../modules/debate/poll/create_poll/binding/CreatePollBinding.dart';
+import '../modules/debate/poll/create_poll/views/CreatePollView.dart';
+import '../modules/debate/poll/liveDebate_own/binding/LiveDebateBinding.dart';
+import '../modules/debate/poll/liveDebate_own/views/LiveDebateView.dart';
+import '../modules/debate/poll/waitting_own/binding/WaitingBinding.dart';
+import '../modules/debate/poll/waitting_own/views/WaitingView.dart';
 import '../modules/debate/private_debate/country_filter/binding/CountryFilterBinding.dart';
 import '../modules/debate/private_debate/country_filter/views/CountryFilterView.dart';
 import '../modules/debate/private_debate/gender_filter/binding/GenderFilterBinding.dart';
 import '../modules/debate/private_debate/gender_filter/views/GenderFilterView.dart';
+import '../modules/debate/private_debate/live_stream/binding/live_stream_binding.dart';
+import '../modules/debate/private_debate/live_stream/views/live_stream_view.dart';
 import '../modules/debate/private_debate/match/binding/MatchSettingsBinding.dart';
 import '../modules/debate/private_debate/match/views/MatchSettingsView.dart';
 import '../modules/debate/private_debate/pvt_debate/binding/PrivateDebateBinding.dart';
@@ -193,6 +201,15 @@ class AppPages {
       transition: Transition.rightToLeft, // Standard forward transition
     ),
 
+    GetPage(
+      name: AppRoutes.LIVE_STREAM,
+      page: () => const LiveStreamView(),
+      binding: LiveStreamBinding(),
+      // Adding a transition for a smooth "going live" feel
+      transition: Transition.zoom,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+
     /// Arena Screen
     GetPage(
       name: AppRoutes.AREANA,
@@ -219,6 +236,31 @@ class AppPages {
       name: AppRoutes.CREATE_POLL,
       page: () => const CreatePollView(),
       binding: CreatePollBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.WAITING_ROOM,
+      page: () => const WaitingView(),
+      binding: WaitingBinding(),
+      // Optional: Add a transition like the design implies
+      transition: Transition.fadeIn,
+    ),
+
+    GetPage(
+      name: AppRoutes.LIVEOWN_DEBATE,
+      page: () => const LiveDebateOwnView(),
+      binding: LiveDebateOwnBinding(),
+      // Adding a fade transition for a smooth "going live" feel
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+
+    GetPage(
+      name: AppRoutes.BOOST_POLL,
+      page: () => const BoostPollView(),
+      binding: BoostPollBinding(),
+      // Adding a transition to match the iOS style back button in the UI
+      transition: Transition.cupertino,
     ),
 
     ///gems shop

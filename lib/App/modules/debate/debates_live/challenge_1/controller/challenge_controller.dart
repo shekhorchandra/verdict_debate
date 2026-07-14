@@ -8,6 +8,7 @@ class ChallengeController extends GetxController {
   // Observables for dynamic data
   final timeRemaining = "10 Min".obs;
   final statement = "Climate change requires immediate action".obs;
+  final viewerCount = "452".obs;
 
   void onChallengePressed() {
     Get.toNamed(AppRoutes.LIVECHALLENGE);

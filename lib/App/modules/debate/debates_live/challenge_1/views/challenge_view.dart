@@ -27,24 +27,15 @@ class ChallengeView extends GetView<ChallengeController> {
                 // Top Navigation/Status Overlay
                 SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Viewer left, Timer right
                       children: [
-                        _buildCircleButton(
-                          Icons.chevron_left,
-                          controller.onBack,
-                        ),
-                        Row(
-                          children: [
-                            _buildCircleButton(Icons.people_outline, () {}),
-                            const SizedBox(width: 8),
-                            _buildTimerBadge(),
-                          ],
-                        ),
+                        // 1. Viewer Count Badge (Left)
+                        _buildViewerBadge(),
+
+                        // 2. Timer Badge (Right)
+                        _buildTimerBadge(),
                       ],
                     ),
                   ),
@@ -98,7 +89,7 @@ class ChallengeView extends GetView<ChallengeController> {
                 Positioned.fill(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                    child: Container(color: Colors.black.withOpacity(0.1)),
+                    // child: Container(color: Colors.black.withOpacity(0.1)),
                   ),
                 ),
                 // Top Pink Border line
@@ -200,6 +191,33 @@ class ChallengeView extends GetView<ChallengeController> {
             shadows: [Shadow(blurRadius: 10, color: Colors.black)],
           ),
         ),
+      ),
+    );
+  }
+
+  // --- Viewer Badge (Glass Style) ---
+  Widget _buildViewerBadge() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.3), // Translucent black
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white10), // Subtle border
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.group_outlined, color: Colors.white, size: 18),
+          const SizedBox(width: 6),
+          Obx(() => Text(
+            controller.viewerCount.value, // e.g., "452"
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          )),
+        ],
       ),
     );
   }

@@ -66,6 +66,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../../routes/app_routes.dart';
+
 class CreatePollController extends GetxController {
   /// 0 = Text, 1 = Media, 2 = Background
   var selectedAddon = 2.obs;
@@ -108,15 +110,23 @@ class CreatePollController extends GetxController {
   }
 
   void findOpponent() {
-    debugPrint(
-      "Finding opponent for ${selectedDuration.value}",
-    );
+    debugPrint("Finding opponent for ${selectedDuration.value}");
 
+    // 1. Show the snackbar (Optional)
     Get.snackbar(
       "Searching",
       "Looking for an opponent...",
       snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.indigo.withOpacity(0.8),
+      colorText: Colors.white,
     );
+
+    // 2. NAVIGATE to the Waiting Room page
+    // Using toNamed so the user can still go back if they want to cancel
+    Get.toNamed(AppRoutes.WAITING_ROOM);
+
+    // OR use Get.offNamed(AppRoutes.WAITING_ROOM)
+    // if you want to remove the creation screen from the history.
   }
 
 

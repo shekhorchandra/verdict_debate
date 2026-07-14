@@ -52,7 +52,7 @@ class UserNavigationBarPage extends GetView<UserNavigationBarController> {
                       children: [
                         _navItem(0, 'Polls', AppAssets.polls, controller),
                         _navItem(1, 'Live', AppAssets.live, controller),
-                        const SizedBox(width: 60), // Spacer for center button
+                        const SizedBox(width: 70), // Spacer for center button
                         _navItem(2, 'Private\nDebate', AppAssets.debate, controller),
                         _navItem(3, 'Profile', AppAssets.profile, controller),
                       ],

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../core/values/app_text.dart';
-import '../controller/VotingInsightsController.dart';
-
+import '../controller/VotingInsightsController.dart'; // Ensure correct path
 
 class VotingInsightsView extends GetView<VotingInsightsController> {
   const VotingInsightsView({super.key});
@@ -15,7 +14,6 @@ class VotingInsightsView extends GetView<VotingInsightsController> {
         bottom: false,
         child: Column(
           children: [
-            // Top Nav/Padding
             const SizedBox(height: 10),
             Expanded(
               child: Padding(
@@ -29,7 +27,7 @@ class VotingInsightsView extends GetView<VotingInsightsController> {
                     children: [
                       _buildHeader(),
                       const Divider(height: 1),
-                      _buildTabSwitcher(),
+                      // Removed Tab Switcher because we show both now
                       Expanded(child: _buildInsightsList()),
                     ],
                   ),
@@ -47,14 +45,9 @@ class VotingInsightsView extends GetView<VotingInsightsController> {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          // The small handle at the top
           Container(
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(10),
-            ),
+            width: 40, height: 4,
+            decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
           ),
           const SizedBox(height: 20),
           Row(
@@ -66,104 +59,84 @@ class VotingInsightsView extends GetView<VotingInsightsController> {
               const Spacer(),
               const Icon(Icons.location_city, color: Color(0xFF818CF8), size: 22),
               const SizedBox(width: 8),
-              Text(
-                "Voting Insights",
-                style: AppText.h5.bold.copyWith(color: const Color(0xFF818CF8)),
-              ),
+              Text("Voting Insights", style: AppText.h5.bold.copyWith(color: const Color(0xFF818CF8))),
               const Spacer(),
-              const SizedBox(width: 20), // Balance the back arrow
+              const SizedBox(width: 20),
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildTabSwitcher() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      child: Obx(() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _tabItem("Agree", 0, const Color(0xFF00B4D8)),
-          Container(width: 1, height: 20, color: Colors.grey[300]),
-          _tabItem("Disagree", 1, const Color(0xFFFF006E)),
-        ],
-      )),
-    );
-  }
-
-  Widget _tabItem(String title, int index, Color activeColor) {
-    bool isSelected = controller.selectedTab.value == index;
-    return GestureDetector(
-      onTap: () => controller.changeTab(index),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
-        color: Colors.transparent,
-        child: Text(
-          title,
-          style: AppText.h5.bold.copyWith(
-            color: isSelected ? activeColor : Colors.grey[300],
-          ),
-        ),
       ),
     );
   }
 
   Widget _buildInsightsList() {
-    return Obx(() {
-      final list = controller.selectedTab.value == 0
-          ? controller.agreeData
-          : controller.disagreeData;
-      final color = controller.selectedTab.value == 0
-          ? const Color(0xFF00B4D8)
-          : const Color(0xFFFF006E);
+    // Note: You can change this to use a combined list from your controller
+    final list = controller.agreeData;
 
-      return ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          return _buildListItem(list[index], color);
-        },
-      );
-    });
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      itemCount: list.length,
+      itemBuilder: (context, index) {
+        // Passing static 60/40 for now to match image,
+        // you can make this dynamic from your data model later
+        return _buildListItem(list[index], 60, 40);
+      },
+    );
   }
 
-  Widget _buildListItem(String location, Color color) {
+  Widget _buildListItem(String location, int agreePct, int disagreePct) {
+    const Color agreeColor = Color(0xFF00B4D8); // Cyan
+    const Color disagreeColor = Color(0xFFFF006E); // Pink
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25),
+      padding: const EdgeInsets.only(bottom: 30),
       child: Column(
         children: [
+          // Top Row: Location and Total Votes
           Row(
             children: [
               const Icon(Icons.location_on_outlined, size: 20, color: Colors.black87),
               const SizedBox(width: 8),
-              Text(location, style: AppText.body1.medium),
+              Text(location, style: AppText.body1.medium.copyWith(color: Colors.black87)),
               const Spacer(),
-              Text("24", style: AppText.body1.medium),
+              const Icon(Icons.person_outline, size: 18, color: Colors.grey),
+              const SizedBox(width: 4),
+              Text("24", style: AppText.body1.medium.copyWith(color: Colors.black87)),
             ],
           ),
-          const SizedBox(height: 10),
-          Stack(
+          const SizedBox(height: 12),
+
+          // Progress Bar Row with Percentages
+          Row(
             children: [
-              Container(
-                height: 8,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
+              // Left Percentage
+              Text("$agreePct%", style: const TextStyle(color: agreeColor, fontWeight: FontWeight.bold, fontSize: 13)),
+              const SizedBox(width: 10),
+
+              // The Combined Bar
+              Expanded(
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              FractionallySizedBox(
-                widthFactor: 0.6, // You can make this dynamic based on data
-                child: Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(10),
+                  child: Row(
+                    children: [
+                      // Agree Segment (Cyan)
+                      Expanded(
+                        flex: agreePct,
+                        child: Container(height: 8, color: agreeColor),
+                      ),
+                      // Disagree Segment (Pink)
+                      Expanded(
+                        flex: disagreePct,
+                        child: Container(height: 8, color: disagreeColor),
+                      ),
+                    ],
                   ),
                 ),
               ),
+
+              const SizedBox(width: 10),
+              // Right Percentage
+              Text("$disagreePct%", style: const TextStyle(color: disagreeColor, fontWeight: FontWeight.bold, fontSize: 13)),
             ],
           ),
         ],

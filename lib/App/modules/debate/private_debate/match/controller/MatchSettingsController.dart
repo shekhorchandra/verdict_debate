@@ -54,8 +54,27 @@ class MatchSettingsController extends GetxController {
   }
 
   void findMatch() {
-    // Fixed the null issue by using 'categoryTitle' instead of arguments directly
-    print("Searching for a match in $categoryTitle ($selectedCountry) for $selectedDuration...");
+    debugPrint("Searching for a match in $categoryTitle ($selectedCountry) for $selectedDuration...");
+
+    // 1. Show a searching snackbar (Optional but recommended for UX)
+    Get.snackbar(
+      "Searching",
+      "Finding the best opponent for $categoryTitle...",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.indigo.withOpacity(0.8),
+      colorText: Colors.white,
+      duration: const Duration(seconds: 2),
+    );
+
+    // 2. Navigate to the Live Stream page
+    // We pass the categoryTitle and duration so the next page can display them
+    Get.toNamed(
+      AppRoutes.LIVE_STREAM,
+      arguments: {
+        "category": categoryTitle,
+        "duration": selectedDuration,
+      },
+    );
   }
 
 

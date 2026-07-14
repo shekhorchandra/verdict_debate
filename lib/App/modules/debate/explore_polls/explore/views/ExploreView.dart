@@ -24,6 +24,7 @@ class ExploreView extends GetView<ExploreViewController> {
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     children: [
+                      const Icon(Icons.notification_add, color: Color(0xFF818CF8), size: 28),
                       const Spacer(),
                       Obx(() => _navItem("For you", 0)),
                       Container(
@@ -34,7 +35,7 @@ class ExploreView extends GetView<ExploreViewController> {
                       ),
                       Obx(() => _navItem("Following", 1)),
                       const Spacer(),
-                      const Icon(Icons.notifications, color: Color(0xFF818CF8), size: 28),
+                      const Icon(Icons.search, color: Color(0xFF818CF8), size: 28),
                     ],
                   ),
                 ),
@@ -124,7 +125,6 @@ class ExploreView extends GetView<ExploreViewController> {
   }
 
   Widget _buildMainContent(Map<String, dynamic> data, {bool isUnderneath = false}) {
-    // Explicit casts to handle potential double/int mix in data
     int disVal = data['disagree'] is int ? data['disagree'] : (data['disagree'] as num).toInt();
     int agrVal = data['agree'] is int ? data['agree'] : (data['agree'] as num).toInt();
 
@@ -155,12 +155,12 @@ class ExploreView extends GetView<ExploreViewController> {
                 const SizedBox(height: 20),
                 Text(
                   data['title'],
-                  style: AppText.h3.bold.copyWith(color: Colors.black, height: 1.2),
+                  style: const TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold, height: 1.2),
                 ),
                 const SizedBox(height: 12),
                 Text(
                   data['desc'],
-                  style: AppText.body2().copyWith(color: Colors.grey[700]),
+                  style: TextStyle(color: Colors.grey[700], fontSize: 14),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -175,7 +175,15 @@ class ExploreView extends GetView<ExploreViewController> {
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // ✅ This is the static stats row we added
+                _statsRow(),
+
+                const SizedBox(height: 15),
+
+                // ✅ 2. Now disVal and agrVal are correctly defined for this call
                 _pollSection(disVal, agrVal),
+
                 const SizedBox(height: 20),
                 _actionButtons(),
               ],
@@ -183,6 +191,50 @@ class ExploreView extends GetView<ExploreViewController> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _statsRow() {
+    Color statColor = Colors.grey[400]!; // Light grey as seen in image
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // Left Side: Total Votes
+        Row(
+          children: [
+            Icon(Icons.person_outline, size: 18, color: statColor),
+            const SizedBox(width: 6),
+            Text(
+              "3,420 votes",
+              style: TextStyle(color: statColor, fontSize: 13),
+            ),
+          ],
+        ),
+
+        // Right Side: Likes, Reposts, Comments
+        Row(
+          children: [
+            _miniStat(Icons.favorite_border, "1.1k", statColor),
+            const SizedBox(width: 12),
+            _miniStat(Icons.repeat, "154", statColor),
+            const SizedBox(width: 12),
+            _miniStat(Icons.chat_bubble_outline, "32", statColor),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _miniStat(IconData icon, String value, Color color) {
+    return Row(
+      children: [
+        Icon(icon, size: 18, color: color),
+        const SizedBox(width: 4),
+        Text(
+          value,
+          style: TextStyle(color: color, fontSize: 13),
+        ),
+      ],
     );
   }
 
@@ -328,106 +380,3 @@ class ExploreView extends GetView<ExploreViewController> {
     ),
   );
 }
-
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '../../../../../core/values/app_text.dart';
-// import '../controller/ExploreController.dart';
-//
-// class ExploreView extends GetView<ExploreViewController> {
-//   const ExploreView({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.transparent,
-//       body: SizedBox(
-//         width: double.infinity,
-//         height: double.infinity,
-//         child: SafeArea(
-//           child: Center(
-//             // ✅ Full content center
-//             child: Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 24),
-//               child: Container(
-//                 width: double.infinity,
-//                 padding: const EdgeInsets.all(28),
-//                 decoration: BoxDecoration(
-//                   color: Colors.white.withOpacity(.10),
-//                   borderRadius: BorderRadius.circular(28),
-//                   border: Border.all(color: Colors.white24),
-//                 ),
-//                 child: Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     const Icon(
-//                       Icons.campaign_rounded,
-//                       color: Colors.white,
-//                       size: 85,
-//                     ),
-//
-//                     const SizedBox(height: 20),
-//
-//                     Text(
-//                       "Polls",
-//                       style: AppText.h3.bold.copyWith(
-//                         color: Colors.white,
-//                         fontSize: 28,
-//                       ),
-//                     ),
-//
-//                     const SizedBox(height: 14),
-//
-//                     Text(
-//                       "Coming Soon",
-//                       style: AppText.h4.bold.copyWith(
-//                         color: Colors.white,
-//                         fontSize: 24,
-//                       ),
-//                     ),
-//
-//                     const SizedBox(height: 10),
-//
-//                     Text(
-//                       "This feature will be launched in the next phase.\nStay tuned for exciting updates!",
-//                       textAlign: TextAlign.center,
-//                       style: const TextStyle(
-//                         color: Colors.white,
-//                         height: 1.5,
-//                       ),
-//                     ),
-//
-//                     const SizedBox(height: 28),
-//
-//                     Container(
-//                       padding: const EdgeInsets.symmetric(
-//                         horizontal: 20,
-//                         vertical: 10,
-//                       ),
-//                       decoration: BoxDecoration(
-//                         color: Colors.white,
-//                         borderRadius: BorderRadius.circular(30),
-//                       ),
-//                       child: Text(
-//                         "🔥 Next Phase Release",
-//                         style: AppText.body1.bold.copyWith(
-//                           color: const Color(0xFF312E81),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
